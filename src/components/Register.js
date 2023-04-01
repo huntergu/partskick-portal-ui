@@ -6,9 +6,11 @@ import YupPassword from "yup-password";
 
 import { register } from "../slices/auth";
 import { clearMessage } from "../slices/message";
+import LoadingSpinner from "./spinner";
 
 const Register = () => {
   const [successful, setSuccessful] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
@@ -54,14 +56,17 @@ const Register = () => {
     const { firstName, lastName, email, password, matchingPassword } = formValue;
 
     setSuccessful(false);
+    setIsLoading(true);
 
     dispatch(register({ firstName, lastName, email, password, matchingPassword }))
       .unwrap()
       .then(() => {
         setSuccessful(true);
+        setIsLoading(false);
       })
       .catch(() => {
         setSuccessful(false);
+        setIsLoading(false);
       });
   };
 
@@ -138,12 +143,15 @@ const Register = () => {
                 </div>
 
                 <div className="form-group">
-                  <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
+                  <button type="submit" className="btn btn-primary btn-block" disabled={isLoading}>Sign Up</button>
                 </div>
               </div>
             )}
           </Form>
         </Formik>
+      </div>
+      <div>
+        {isLoading && <LoadingSpinner />}
       </div>
 
       {message && (
