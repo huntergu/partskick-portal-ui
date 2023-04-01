@@ -6,7 +6,6 @@ import YupPassword from "yup-password";
 
 import { register } from "../slices/auth";
 import { clearMessage } from "../slices/message";
-import LoadingSpinner from "./spinner";
 
 const Register = () => {
   const [successful, setSuccessful] = useState(false);
@@ -143,15 +142,16 @@ const Register = () => {
                 </div>
 
                 <div className="form-group">
-                  <button type="submit" className="btn btn-primary btn-block" disabled={isLoading}>Sign Up</button>
+                  <button type="submit" className="btn btn-primary btn-block" disabled={isLoading}>
+                    {isLoading && (
+                        <span className="spinner-border spinner-border-sm"></span>
+                    )}
+                    <span>Sign Up</span></button>
                 </div>
               </div>
             )}
           </Form>
         </Formik>
-      </div>
-      <div>
-        {isLoading && <LoadingSpinner />}
       </div>
 
       {message && (

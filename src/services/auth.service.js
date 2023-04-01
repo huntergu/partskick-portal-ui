@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_URL = process.env.REACT_APP_API_URL + "/user/";
+const REG_API_URL = process.env.REACT_APP_API_URL + "/user/";
+const AUTH_API_URL = process.env.REACT_APP_API_URL + "/api/auth/";
 
 const register = (firstName, lastName, email, password, matchingPassword) => {
   const bodyFormData = new FormData();
@@ -10,12 +11,12 @@ const register = (firstName, lastName, email, password, matchingPassword) => {
   bodyFormData.append("password", password);
   bodyFormData.append("matchingPassword", matchingPassword);
 
-  return axios.post(API_URL + "registration", bodyFormData);
+  return axios.post(REG_API_URL + "registration", bodyFormData);
 };
 
 const login = (username, password) => {
   return axios
-    .post(API_URL + "signin", {
+    .post(AUTH_API_URL + "signin", {
       username,
       password,
     })
