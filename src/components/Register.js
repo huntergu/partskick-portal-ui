@@ -130,14 +130,14 @@ const Register = () => {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="">Repeat Password</label>
+                  <label htmlFor="matchingPassword">Repeat Password</label>
                   <Field
-                    name=""
+                    name="matchingPassword"
                     type="password"
                     className="form-control"
                   />
                   <ErrorMessage
-                    name=""
+                    name="matchingPassword"
                     component="div"
                     className="alert alert-danger"
                   />

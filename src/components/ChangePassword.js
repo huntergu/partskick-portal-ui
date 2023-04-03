@@ -8,17 +8,24 @@ import { changePassword } from "../slices/auth";
 import { clearMessage } from "../slices/message";
 import {LOCALES} from "../i18n/locales";
 import {messages} from "../i18n/messages";
+import {Navigate} from "react-router-dom";
 
 const ChangePassword = () => {
   const [successful, setSuccessful] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
+  const { user: currentUser } = useSelector((state) => state.auth);
   const { message } = useSelector((state) => state.message);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(clearMessage());
   }, [dispatch]);
+
+  if (!currentUser) {
+    return <Navigate to="/login" />;
+  }
+
 
   const initialValues = {
     oldPassword: "",
