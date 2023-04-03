@@ -6,6 +6,8 @@ import YupPassword from "yup-password";
 
 import { register } from "../slices/auth";
 import { clearMessage } from "../slices/message";
+import {messages} from "../i18n/messages";
+import {LOCALES} from "../i18n/locales";
 
 const Register = () => {
   const [successful, setSuccessful] = useState(false);
@@ -29,26 +31,26 @@ const Register = () => {
   YupPassword(Yup);
 
   const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required("First Name is required."),
-    lastName: Yup.string().required("Last Name is required."),
+    firstName: Yup.string().required(messages[LOCALES.ENGLISH].field_required),
+    lastName: Yup.string().required(messages[LOCALES.ENGLISH].field_required),
     email: Yup.string()
-      .email("This is not a valid email.")
-      .required("This field is required!"),
+      .email(messages[LOCALES.ENGLISH].invalid_email)
+      .required(messages[LOCALES.ENGLISH].field_required),
     password: Yup.string().password()
-      .min(8, "Password must be between 8 and 30 characters.")
-      .max(30, "Password must be between 8 and 30 characters.")
-      .minUppercase(1, "Password must contain at least 1 upper case letter.")
-      .minNumbers(1, 'Password must contain at least 1 number.')
-      .minSymbols(1, 'Password must contain at least 1 special character.')
-      .required("This field is required!"),
-      matchingPassword: Yup.string()
-      .min(8, "Password must be between 8 and 30 characters.")
-      .max(30, "Password must be between 8 and 30 characters.")
-      .minUppercase(1, "Password must contain at least 1 upper case letter.")
-      .minNumbers(1, 'Password must contain at least 1 number.')
-      .minSymbols(1, 'Password must contain at least 1 special character.')
-      .oneOf([Yup.ref('password'), null], 'Passwords must match.')
-      .required("This field is required!"),
+        .min(8, messages[LOCALES.ENGLISH].password_length)
+        .max(30, messages[LOCALES.ENGLISH].password_length)
+        .minUppercase(1, messages[LOCALES.ENGLISH].password_upper_case)
+        .minNumbers(1, messages[LOCALES.ENGLISH].password_number)
+        .minSymbols(1, messages[LOCALES.ENGLISH].password_symbol)
+        .required(messages[LOCALES.ENGLISH].field_required),
+    matchingPassword: Yup.string()
+        .min(8, messages[LOCALES.ENGLISH].password_length)
+        .max(30, messages[LOCALES.ENGLISH].password_length)
+        .minUppercase(1, messages[LOCALES.ENGLISH].password_upper_case)
+        .minNumbers(1, messages[LOCALES.ENGLISH].password_number)
+        .minSymbols(1, messages[LOCALES.ENGLISH].password_symbol)
+        .oneOf([Yup.ref("password"), null], messages[LOCALES.ENGLISH].password_match)
+        .required(messages[LOCALES.ENGLISH].field_required),
   });
 
   const handleRegister = (formValue) => {
@@ -128,14 +130,14 @@ const Register = () => {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="matchingPassword">Repeat Password</label>
+                  <label htmlFor="">Repeat Password</label>
                   <Field
-                    name="matchingPassword"
+                    name=""
                     type="password"
                     className="form-control"
                   />
                   <ErrorMessage
-                    name="matchingPassword"
+                    name=""
                     component="div"
                     className="alert alert-danger"
                   />

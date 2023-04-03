@@ -16,6 +16,7 @@ import BoardAdmin from "./components/BoardAdmin";
 import { logout } from "./slices/auth";
 
 import EventBus from "./common/EventBus";
+import ChangePassword from "./components/ChangePassword";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -125,6 +126,7 @@ const App = () => {
             <Route path="/user" element={<BoardUser />} />
             <Route path="/mod" element={<BoardModerator />} />
             <Route path="/admin" element={<BoardAdmin />} />
+            <Route path="/changePassword" element={<ChangePassword />} />
           </Routes>
         </div>
       </div>

@@ -4,8 +4,10 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import YupPassword from "yup-password";
 
-import { register } from "../slices/auth";
+import { changePassword } from "../slices/auth";
 import { clearMessage } from "../slices/message";
+import {LOCALES} from "../i18n/locales";
+import {messages} from "../i18n/messages";
 
 const ChangePassword = () => {
   const [successful, setSuccessful] = useState(false);
@@ -20,7 +22,7 @@ const ChangePassword = () => {
 
   const initialValues = {
     oldPassword: "",
-    password: "",
+    newPassword: "",
     matchingPassword: ""
   };
 
@@ -28,36 +30,36 @@ const ChangePassword = () => {
 
   const validationSchema = Yup.object().shape({
     oldPassword: Yup.string().password()
-        .min(8, "Password must be between 8 and 30 characters.")
-        .max(30, "Password must be between 8 and 30 characters.")
-        .minUppercase(1, "Password must contain at least 1 upper case letter.")
-        .minNumbers(1, 'Password must contain at least 1 number.')
-        .minSymbols(1, 'Password must contain at least 1 special character.')
-        .required("This field is required!"),
-    password: Yup.string().password()
-      .min(8, "Password must be between 8 and 30 characters.")
-      .max(30, "Password must be between 8 and 30 characters.")
-      .minUppercase(1, "Password must contain at least 1 upper case letter.")
-      .minNumbers(1, 'Password must contain at least 1 number.')
-      .minSymbols(1, 'Password must contain at least 1 special character.')
-      .required("This field is required!"),
-      matchingPassword: Yup.string()
-      .min(8, "Password must be between 8 and 30 characters.")
-      .max(30, "Password must be between 8 and 30 characters.")
-      .minUppercase(1, "Password must contain at least 1 upper case letter.")
-      .minNumbers(1, 'Password must contain at least 1 number.')
-      .minSymbols(1, 'Password must contain at least 1 special character.')
-      .oneOf([Yup.ref('password'), null], 'Passwords must match.')
-      .required("This field is required!"),
+        .min(8, messages[LOCALES.ENGLISH].password_length)
+        .max(30, messages[LOCALES.ENGLISH].password_length)
+        .minUppercase(1, messages[LOCALES.ENGLISH].password_upper_case)
+        .minNumbers(1, messages[LOCALES.ENGLISH].password_number)
+        .minSymbols(1, messages[LOCALES.ENGLISH].password_symbol)
+        .required(messages[LOCALES.ENGLISH].field_required),
+    newPassword: Yup.string().password()
+        .min(8, messages[LOCALES.ENGLISH].password_length)
+        .max(30, messages[LOCALES.ENGLISH].password_length)
+        .minUppercase(1, messages[LOCALES.ENGLISH].password_upper_case)
+        .minNumbers(1, messages[LOCALES.ENGLISH].password_number)
+        .minSymbols(1, messages[LOCALES.ENGLISH].password_symbol)
+        .required(messages[LOCALES.ENGLISH].field_required),
+    matchingPassword: Yup.string()
+        .min(8, messages[LOCALES.ENGLISH].password_length)
+        .max(30, messages[LOCALES.ENGLISH].password_length)
+        .minUppercase(1, messages[LOCALES.ENGLISH].password_upper_case)
+        .minNumbers(1, messages[LOCALES.ENGLISH].password_number)
+        .minSymbols(1, messages[LOCALES.ENGLISH].password_symbol)
+        .oneOf([Yup.ref("newPassword"), null], messages[LOCALES.ENGLISH].password_match)
+        .required(messages[LOCALES.ENGLISH].field_required),
   });
 
   const handleChangePassword = (formValue) => {
-    const { oldPassword, password, matchingPassword } = formValue;
+    const { oldPassword, newPassword, matchingPassword } = formValue;
 
     setSuccessful(false);
     setIsLoading(true);
 
-    dispatch(register({ oldPassword, password, matchingPassword }))
+    dispatch(changePassword({ oldPassword, newPassword, matchingPassword }))
       .unwrap()
       .then(() => {
         setSuccessful(true);
@@ -99,21 +101,21 @@ const ChangePassword = () => {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="password">Password</label>
+                  <label htmlFor="newPassword">New Password</label>
                   <Field
-                    name="password"
+                    name="newPassword"
                     type="password"
                     className="form-control"
                   />
                   <ErrorMessage
-                    name="password"
+                    name="newPassword"
                     component="div"
                     className="alert alert-danger"
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="matchingPassword">Repeat Password</label>
+                  <label htmlFor="">Repeat New Password</label>
                   <Field
                     name="matchingPassword"
                     type="password"
