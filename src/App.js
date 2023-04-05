@@ -17,6 +17,8 @@ import { logout } from "./slices/auth";
 
 import EventBus from "./common/EventBus";
 import ChangePassword from "./components/ChangePassword";
+import ForgetPassword from "./components/ForgetPassword";
+import ResetPassword from "./components/ResetPassword";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -127,6 +129,8 @@ const App = () => {
             <Route path="/mod" element={<BoardModerator />} />
             <Route path="/admin" element={<BoardAdmin />} />
             <Route path="/changePassword" element={<ChangePassword />} />
+            <Route path="/forgetPassword" element={<ForgetPassword />} />
+            <Route path="/resetPassword" element={<ResetPassword />} />
           </Routes>
         </div>
       </div>

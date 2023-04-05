@@ -26,10 +26,48 @@ export const register = createAsyncThunk(
 );
 
 export const changePassword = createAsyncThunk(
-  "auth/changePassword",
+  "user/changePassword",
   async ({ oldPassword, newPassword, matchingPassword }, thunkAPI) => {
     try {
       const response = await AuthService.changePassword(oldPassword, newPassword);
+      thunkAPI.dispatch(setMessage(response.data.message));
+      return response.data;
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
+export const resetPassword = createAsyncThunk(
+  "user/resetPassword",
+  async ({ newPassword, token }, thunkAPI) => {
+    try {
+      const response = await AuthService.resetPassword(newPassword, token);
+      thunkAPI.dispatch(setMessage(response.data.message));
+      return response.data;
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
+export const forgetPassword = createAsyncThunk(
+  "user/forgetPassword",
+  async ({ email }, thunkAPI) => {
+    try {
+      const response = await AuthService.forgetPassword(email);
       thunkAPI.dispatch(setMessage(response.data.message));
       return response.data;
     } catch (error) {

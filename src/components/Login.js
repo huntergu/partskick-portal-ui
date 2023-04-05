@@ -94,8 +94,11 @@ const Login = () => {
             </div>
           </Form>
         </Formik>
+        <div className="form-group">
+          <a href={"/forgetPassword"} className="nav-link">
+            <span>Forget Password</span></a>
+        </div>
       </div>
-
       {message && (
         <div className="form-group">
           <div className="alert alert-danger" role="alert">
