@@ -15,13 +15,28 @@ const RegisterClient = () => {
   const { user: currentUser } = useSelector((state) => state.auth);
   const { message } = useSelector((state) => state.message);
   const [postzip, setPostzip] = useState("Post Code");
-  const [countryCode, setCountryCode] = useState("");
+  const [country, setCountry] = useState("");
   const [provstate, setProvstate] = useState("");
+  const [province, setProvince] = useState("");
   const [content, setContent] = useState("");
   const [countries, setCountries] = useState([]);
   const [pz, setPz] = useState();
+  const [postCode, setPostCode] = useState("");
 
   const dispatch = useDispatch();
+
+  const [initialValues, setInitialValues] = useState({
+    clientName: "",
+    phone: "",
+    email: "",
+    address1: "",
+    address2: "",
+    city: "",
+    province: province || "",
+    postCode: postCode || "",
+    country: country || "",
+    contactPerson: "",
+  });
 
   useEffect(() => {
     setIsLoading(true);
@@ -30,6 +45,7 @@ const RegisterClient = () => {
           setContent(response.data);
           setCountries(response.data.countries);
           setPz(response.data.ps);
+          setInitialValues({...initialValues, "country": response.data.countries[0], "province": response.data.ps[response.data.countries[0]][0]})
         },
         (error) => {
           const _content =
@@ -45,12 +61,12 @@ const RegisterClient = () => {
 
   useEffect(() => {
     if (countries && countries.length > 0) {
-      setCountryCode(countries[0]);
+      setCountry(countries[0]);
       setPostzip(countries[0] === "CAN" ? "Post Code" : "Zip Code");
       setProvstate(countries[0] === "CAN" ? "Province" : "State");
-
+      setProvince(pz[countries[0]][0].code);
     }
-  }, [countries]);
+  }, [countries, pz]);
 
   useEffect(() => {
     dispatch(clearMessage());
@@ -61,23 +77,10 @@ const RegisterClient = () => {
   }
 
   const phoneReg = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
-  const usZipReg = /\d{5}(-\d{4})?$/;
-  const caPostReg = /[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ]( )?\d[ABCEGHJKLMNPRSTVWXYZ]\d$/
+  const usZipReg = /^\d{5}(-\d{4})?$/;
+  const caPostReg = /[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ]( )?\d[ABCEGHJKLMNPRSTVWXYZ]\d$/i
 
-  const initialValues = {
-    clientName: "",
-    phone: "",
-    email: "",
-    address1: "",
-    address2: "",
-    city: "",
-    province: "",
-    postcode: "",
-    country: "",
-    contact: "",
-  };
 
-/*
   const validationSchema = Yup.object().shape({
     clientName: Yup.string().required(messages[LOCALES.ENGLISH].field_required),
     phone: Yup.string().required(messages[LOCALES.ENGLISH].field_required)
@@ -87,27 +90,19 @@ const RegisterClient = () => {
         .required(messages[LOCALES.ENGLISH].field_required),
     address1: Yup.string().required(messages[LOCALES.ENGLISH].field_required),
     city: Yup.string().required(messages[LOCALES.ENGLISH].field_required),
-    country: Yup.string().required(messages[LOCALES.ENGLISH].field_required),
-    province: Yup.string().required(messages[LOCALES.ENGLISH].field_required),
-    postcode: Yup.string().required(messages[LOCALES.ENGLISH].field_required)
-        .when("country", {
-          is: (country) => country === "CAN",
-          then: Yup.string().matches(caPostReg, messages[LOCALES.ENGLISH].invalid_postcode),
-          otherwise: Yup.string().matches(usZipReg, messages[LOCALES.ENGLISH].invalid_zipcode)
-        }),
-    contact: Yup.string().required(messages[LOCALES.ENGLISH].field_required),
+    contactPerson: Yup.string().required(messages[LOCALES.ENGLISH].field_required),
   });
-*/
 
   const handleRegisterClient = (formValue) => {
-    const { clientName, phone, email, address1, address2, city, province, postcode, country, contact } = formValue;
+    const { clientName, phone, email, address1, address2, city, postCode, contactPerson } = formValue;
 
     setSuccessful(false);
     setIsLoading(true);
 
-    dispatch(userService.registerClient({ clientName, phone, email, address1, address2, city, province, postcode, country, contact }))
+    dispatch(userService.registerClient({ clientName, phone, email, address1, address2, city, province, postCode, country, contactPerson }))
       .unwrap()
       .then(() => {
+
         setSuccessful(true);
         setIsLoading(false);
       })
@@ -118,9 +113,30 @@ const RegisterClient = () => {
   };
 
   const handleSelectionCountry = (event) => {
-    setPostzip(countries[event.target.selectedIndex] === "CAN" ? "Post Code" : "Zip Code");
-    setProvstate(countries[event.target.selectedIndex] === "CAN" ? "Province" : "State");
-    setCountryCode(countries[event.target.selectedIndex]);
+    setPostzip(event.target.value === "CAN" ? "Post Code" : "Zip Code");
+    setProvstate(event.target.value === "CAN" ? "Province" : "State");
+    setCountry(event.target.value);
+    setProvince(pz[event.target.value][0].code);
+  }
+
+  const handleSelectionProv = (event) => {
+    setProvince(event.target.value);
+  }
+
+  const validatePZ = (value) => {
+    let error;
+    if (!value) {
+      error = "Required";
+    } else if (country === "CAN") {
+      if (!caPostReg.test(value)) {
+        error = messages[LOCALES.ENGLISH].invalid_postcode;
+      }
+    } else if (country === "USA") {
+      if (!usZipReg.test(value)) {
+        error = messages[LOCALES.ENGLISH].invalid_zipcode;
+      }
+    }
+    return error;
   }
 
   return (
@@ -133,9 +149,10 @@ const RegisterClient = () => {
         />
         <Formik
           initialValues={initialValues}
-          // validationSchema={validationSchema}
+          validationSchema={validationSchema}
           onSubmit={handleRegisterClient}
         >
+          {({ values, setFieldValue, handleSubmit, isSubmitting }) => (
           <Form>
             {!successful && (
               <div>
@@ -222,8 +239,13 @@ const RegisterClient = () => {
                   <label htmlFor="country">Country</label>
                   <div className="dropdown">
                     <select
+                        name="country"
+                        value={country}
                         className="form-select"
-                        onChange={handleSelectionCountry}
+                        onChange={(event) => {
+                          setFieldValue("country", event.target.value);
+                          handleSelectionCountry(event);
+                        }}
                     >
 
                       {countries && countries.map((country, index) => (
@@ -239,10 +261,16 @@ const RegisterClient = () => {
                   <label htmlFor="province">{provstate}</label>
                   <div className="dropdown">
                     <select
+                        name="province"
+                        value={province}
                         className="form-select"
+                        onChange={(event) => {
+                          setFieldValue("province", event.target.value);
+                          handleSelectionProv(event);
+                        }}
                     >
-                      {pz && pz[countryCode] && pz[countryCode].map((pors, index) => (
-                          <option value={pors.name}>
+                      {pz && pz[country] && pz[country].map((pors, index) => (
+                          <option value={pors.code}>
                             {pors.name}
                           </option>
                       ))}
@@ -251,27 +279,28 @@ const RegisterClient = () => {
                   </div>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="postcode">{postzip}</label>
+                  <label htmlFor="postCode">{postzip}</label>
                   <Field
-                    name="postcode"
+                    name="postCode"
                     type="input"
                     className="form-control"
+                    validate={validatePZ}
                   />
                   <ErrorMessage
-                    name="postcode"
+                    name="postCode"
                     component="div"
                     className="alert alert-danger"
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="contact">Contact Person</label>
+                  <label htmlFor="contactPerson">Contact Person</label>
                   <Field
-                    name="contact"
+                    name="contactPerson"
                     type="input"
                     className="form-control"
                   />
                   <ErrorMessage
-                    name="contact"
+                    name="contactPerson"
                     component="div"
                     className="alert alert-danger"
                   />
@@ -286,6 +315,7 @@ const RegisterClient = () => {
               </div>
             )}
           </Form>
+              )}
         </Formik>
       </div>
 
