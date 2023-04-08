@@ -8,6 +8,9 @@ export const messages = {
         password_symbol: "Password must contain at least 1 special character.",
         password_match: "Passwords must match",
         field_required: "This field is required!",
-        invalid_email: "This is not a valid email."
+        invalid_email: "This is not a valid email.",
+        invalid_phone: "This is not a valid phone number.",
+        invalid_postcode: "This is not a valid post code.",
+        invalid_zipcode: "This is not a valid zip code.",
     }
 }

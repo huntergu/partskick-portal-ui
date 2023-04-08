@@ -4,15 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="change pwd">
-      <change afterPath="$PROJECT_DIR$/src/components/ForgetPassword.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ResetPassword.js" afterDir="false" />
+    <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="reset pwd">
+      <change afterPath="$PROJECT_DIR$/src/components/RegisterClient.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ChangePassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ChangePassword.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/auth.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/auth.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/slices/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/slices/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/i18n/messages.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18n/messages.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/user.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/user.service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,6 +85,12 @@
       <workItem from="1680367114288" duration="7950000" />
       <workItem from="1680451465778" duration="13062000" />
       <workItem from="1680567618432" duration="4103000" />
+      <workItem from="1680653425432" duration="531000" />
+      <workItem from="1680653980510" duration="3045000" />
+      <workItem from="1680743481398" duration="650000" />
+      <workItem from="1680744830404" duration="6737000" />
+      <workItem from="1680833397269" duration="6493000" />
+      <workItem from="1680883180851" duration="25433000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1680323657807</created>
@@ -136,7 +141,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680485314723</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="reset pwd">
+      <created>1680653612451</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1680653612451</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -153,20 +165,17 @@
     <MESSAGE value="register" />
     <MESSAGE value="login" />
     <MESSAGE value="change pwd" />
-    <option name="LAST_COMMIT_MESSAGE" value="change pwd" />
+    <MESSAGE value="reset pwd" />
+    <option name="LAST_COMMIT_MESSAGE" value="reset pwd" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/components/Register.js</url>
-          <line>58</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/components/ChangePassword.js</url>
-          <line>37</line>
-          <option name="timeStamp" value="7" />
+          <url>file://$PROJECT_DIR$/src/components/RegisterClient.js</url>
+          <line>102</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

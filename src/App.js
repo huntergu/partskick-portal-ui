@@ -19,6 +19,7 @@ import EventBus from "./common/EventBus";
 import ChangePassword from "./components/ChangePassword";
 import ForgetPassword from "./components/ForgetPassword";
 import ResetPassword from "./components/ResetPassword";
+import RegisterClient from "./components/RegisterClient";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -131,6 +132,7 @@ const App = () => {
             <Route path="/changePassword" element={<ChangePassword />} />
             <Route path="/forgetPassword" element={<ForgetPassword />} />
             <Route path="/resetPassword" element={<ResetPassword />} />
+            <Route path="/registerNewClient" element={<RegisterClient />} />
           </Routes>
         </div>
       </div>
