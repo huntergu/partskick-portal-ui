@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="register client">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ChangePassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ChangePassword.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Home.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/RegisterClient.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegisterClient.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/user.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/user.service.js" afterDir="false" />
     </list>
@@ -87,7 +89,9 @@
       <workItem from="1680744830404" duration="6737000" />
       <workItem from="1680833397269" duration="6493000" />
       <workItem from="1680883180851" duration="25919000" />
-      <workItem from="1680969004169" duration="12520000" />
+      <workItem from="1680969004169" duration="13181000" />
+      <workItem from="1680988213427" duration="1901000" />
+      <workItem from="1681070497343" duration="4839000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1680323657807</created>
@@ -152,7 +156,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680928185353</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="register client">
+      <created>1680984155977</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1680984155977</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -179,8 +190,13 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/services/user.service.js</url>
           <line>39</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/components/RegisterClient.js</url>
+          <line>103</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="43" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

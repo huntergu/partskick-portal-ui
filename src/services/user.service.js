@@ -32,12 +32,12 @@ const getAdminBoard = () => {
 
 const registerClient = createAsyncThunk(
     "client/register",
-    async ({ clientName, phone, email, address1, address2, city, province, postCode, country, contactPerson }, thunkAPI) => {
+    async ({ clientName, phone, email, address1, address2, city, province, postCode, country, contactFirstName, contactLastName, createAccount }, thunkAPI) => {
       try {
         const response = await axios.post(USER_API_URL + "registerClient",
-            {clientName, phone, email, address1, address2, city, province, postCode, country, contactPerson},
+            {clientName, phone, email, address1, address2, city, province, postCode, country, contactFirstName, contactLastName, createAccount},
             { headers: authHeader() });
-        thunkAPI.dispatch(setMessage(response.data));
+        thunkAPI.dispatch(setMessage("New Client ID: " + response.data));
         return response.data;
       } catch (error) {
         const message =

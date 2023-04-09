@@ -63,27 +63,28 @@ const Home = () => {
   }
 
   const handleSelection = (event) => {
-    setSelectedOption(content[event.target.selectedIndex].oid);
+    setSelectedOption(event.target.value);
   };
 
   return (
       <div>
         <div className="d-flex container">
-          <span className="text-nowrap">Auto Body Shop</span>
+          <span className="text-nowrap">Client:</span>
           <div className="container">
             <div className="dropdown">
               <select
+                  value={selectedOption}
                   className="form-select"
                   onChange={handleSelection}
               >
                 {!content &&
                     <option value="" disabled>
-                      No registration for auto body shop found
+                      No client registration found
                     </option>
                 }
 
                 {responseCode === 200 && content && content.map((client, index) => (
-                    <option key={client.oid} value={client.clientName} selected={client.oid === selectedOption}>
+                    <option value={client.oid}>
                       {client.clientName}
                     </option>
                 ))}
@@ -98,7 +99,7 @@ const Home = () => {
           </div>
           <div className="container">
             <Link to="/registerNewClient">
-              <button className="btn-primary">Register New Shop</button>
+              <button className="btn-primary">Register New Client</button>
             </Link>
           </div>
         </div>
@@ -114,6 +115,12 @@ const Home = () => {
               </div>
             </div>
         )}
+        <div className="d-flex container">
+          <span className="text-nowrap">ID:</span>
+          <div className="container">
+            <span>{selectedOption}</span>
+          </div>
+        </div>
         <div className="row mt-5">
           <table className="table">
             <thead>

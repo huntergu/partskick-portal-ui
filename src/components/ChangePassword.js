@@ -36,12 +36,7 @@ const ChangePassword = () => {
   YupPassword(Yup);
 
   const validationSchema = Yup.object().shape({
-    oldPassword: Yup.string().password()
-        .min(8, messages[LOCALES.ENGLISH].password_length)
-        .max(30, messages[LOCALES.ENGLISH].password_length)
-        .minUppercase(1, messages[LOCALES.ENGLISH].password_upper_case)
-        .minNumbers(1, messages[LOCALES.ENGLISH].password_number)
-        .minSymbols(1, messages[LOCALES.ENGLISH].password_symbol)
+    oldPassword: Yup.string()
         .required(messages[LOCALES.ENGLISH].field_required),
     newPassword: Yup.string().password()
         .min(8, messages[LOCALES.ENGLISH].password_length)

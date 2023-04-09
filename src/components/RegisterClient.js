@@ -22,7 +22,7 @@ const RegisterClient = () => {
   const [countries, setCountries] = useState([]);
   const [pz, setPz] = useState();
   const [postCode, setPostCode] = useState("");
-
+  const [createAccount, setCreateAccount] = useState(false);
   const dispatch = useDispatch();
 
   const [initialValues, setInitialValues] = useState({
@@ -35,7 +35,8 @@ const RegisterClient = () => {
     province: province || "",
     postCode: postCode || "",
     country: country || "",
-    contactPerson: "",
+    contactFirstName: "",
+    contactLastName: "",
   });
 
   useEffect(() => {
@@ -90,16 +91,17 @@ const RegisterClient = () => {
         .required(messages[LOCALES.ENGLISH].field_required),
     address1: Yup.string().required(messages[LOCALES.ENGLISH].field_required),
     city: Yup.string().required(messages[LOCALES.ENGLISH].field_required),
-    contactPerson: Yup.string().required(messages[LOCALES.ENGLISH].field_required),
+    contactFirstName: Yup.string().required(messages[LOCALES.ENGLISH].field_required),
+    contactLastName: Yup.string().required(messages[LOCALES.ENGLISH].field_required),
   });
 
   const handleRegisterClient = (formValue) => {
-    const { clientName, phone, email, address1, address2, city, postCode, contactPerson } = formValue;
+    const { clientName, phone, email, address1, address2, city, postCode, contactFirstName, contactLastName } = formValue;
 
     setSuccessful(false);
     setIsLoading(true);
 
-    dispatch(userService.registerClient({ clientName, phone, email, address1, address2, city, province, postCode, country, contactPerson }))
+    dispatch(userService.registerClient({ clientName, phone, email, address1, address2, city, province, postCode, country, contactFirstName, contactLastName, createAccount }))
       .unwrap()
       .then(() => {
 
@@ -140,7 +142,7 @@ const RegisterClient = () => {
   }
 
   return (
-    <div className="col-md-12 signup-form">
+    <div className="col-md-12">
       <div className="card card-container">
         <img
           src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
@@ -179,19 +181,6 @@ const RegisterClient = () => {
                   />
                   <ErrorMessage
                     name="phone"
-                    component="div"
-                    className="alert alert-danger"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <Field
-                    name="email"
-                    type="email"
-                    className="form-control"
-                  />
-                  <ErrorMessage
-                    name="email"
                     component="div"
                     className="alert alert-danger"
                   />
@@ -293,17 +282,53 @@ const RegisterClient = () => {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="contactPerson">Contact Person</label>
+                  <label htmlFor="contactFirstName">Contact First Name</label>
                   <Field
-                    name="contactPerson"
+                    name="contactFirstName"
                     type="input"
                     className="form-control"
                   />
                   <ErrorMessage
-                    name="contactPerson"
+                    name="contactFirstName"
                     component="div"
                     className="alert alert-danger"
                   />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="contactLastName">Contact Last Name</label>
+                  <Field
+                    name="contactLastName"
+                    type="input"
+                    className="form-control"
+                  />
+                  <ErrorMessage
+                    name="contactLastName"
+                    component="div"
+                    className="alert alert-danger"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="email">Email</label>
+                  <Field
+                      name="email"
+                      type="email"
+                      className="form-control"
+                  />
+                  <ErrorMessage
+                      name="email"
+                      component="div"
+                      className="alert alert-danger"
+                  />
+                </div>
+                <div className="form-group">
+                  <label>
+                    <input
+                        type="checkbox"
+                        checked={createAccount}
+                        onChange={() => setCreateAccount(!createAccount)}
+                    />
+                    &nbsp;&nbsp;&nbsp;Create User Account For Contact Person
+                  </label>
                 </div>
                 <div className="form-group">
                   <button type="submit" className="btn btn-primary btn-block" disabled={isLoading}>
