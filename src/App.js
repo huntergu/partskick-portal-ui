@@ -20,6 +20,7 @@ import ChangePassword from "./components/ChangePassword";
 import ForgetPassword from "./components/ForgetPassword";
 import ResetPassword from "./components/ResetPassword";
 import RegisterClient from "./components/RegisterClient";
+import Subscriptions from "./components/Subscriptions";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -133,6 +134,7 @@ const App = () => {
             <Route path="/forgetPassword" element={<ForgetPassword />} />
             <Route path="/resetPassword" element={<ResetPassword />} />
             <Route path="/registerNewClient" element={<RegisterClient />} />
+            <Route path="//manageSubscription" element={<Subscriptions />} />
           </Routes>
         </div>
       </div>

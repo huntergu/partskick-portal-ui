@@ -47,17 +47,17 @@ const RegisterClient = () => {
           setCountries(response.data.countries);
           setPz(response.data.ps);
           setInitialValues({...initialValues, "country": response.data.countries[0], "province": response.data.ps[response.data.countries[0]][0]})
+          setIsLoading(false);
         },
         (error) => {
           const _content =
               (error.response && error.response.data) ||
               error.message ||
               error.toString();
-
           setContent(_content);
+          setIsLoading(false);
         }
     );
-    setIsLoading(false);
   }, []);
 
   useEffect(() => {

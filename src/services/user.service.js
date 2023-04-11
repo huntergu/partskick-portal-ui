@@ -11,6 +11,9 @@ const getWorkstationList = (clientId) => {
 const getClientList = () => {
   return axios.get(USER_API_URL + "clients", { headers: authHeader() });
 }
+const getClientInfo = (clientId) => {
+  return axios.get(USER_API_URL + "client/" + clientId, { headers: authHeader() });
+}
 const getCpz = () => {
   return axios.get(USER_API_URL + "cpz", { headers: authHeader() });
 }
@@ -60,7 +63,8 @@ const userService = {
   getClientList,
   getWorkstationList,
   registerClient,
-  getCpz
+  getCpz,
+  getClientInfo
 };
 
 export default userService
