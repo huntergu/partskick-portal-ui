@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from "react";
 import userService from "../services/user.service";
-import {Link} from "react-router-dom";
-import Pk1m10 from "../paypal/pk1m10";
-import Pk1y10 from "../paypal/pk1y10";
+import PkSubscription from "../paypal/PkSubscription";
 
 const Subscriptions = () => {
     const params = new URLSearchParams(window.location.search);
@@ -10,7 +8,29 @@ const Subscriptions = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [clientInfo, setClientInfo] = useState(null);
     const [message, setMessage] = useState(null);
-    const [selectedSub, setSelectedSub] = useState("pk1m10");
+    const [selectedSub, setSelectedSub] = useState(null);
+    const [subs, setSubs] = useState([]);
+
+    useEffect(() => {
+        setIsLoading(true);
+        userService.getSubscription().then(
+            (response) => {
+                setSubs(response.data);
+                if (response.data && response.data instanceof Array && response.data.length > 0) {
+                    setSelectedSub(response.data[0])
+                }
+                setIsLoading(false);
+            },
+            (error) => {
+                const _content =
+                    (error.response && error.response.data) ||
+                    error.message ||
+                    error.toString();
+                setMessage(_content);
+                setIsLoading(false);
+            }
+        );
+    }, []);
 
     useEffect(() => {
         setIsLoading(true);
@@ -31,7 +51,7 @@ const Subscriptions = () => {
     }, [clientId]);
 
     const handleSelection = (event) => {
-        setSelectedSub(event.target.value);
+        setSelectedSub(subs[event.target.selectedIndex]);
     }
     return (
         <div className="container">
@@ -68,34 +88,35 @@ const Subscriptions = () => {
                         <label>{clientInfo.email}</label>
                     </div>
                 </div>
-                <div className="card-footer">
-                    <div className="d-flex container">
-                        <span className="text-nowrap">Subscription:</span>
-                        <div className="container">
-                            <div className="dropdown">
-                                <select
-                                    value={selectedSub}
-                                    className="form-select"
-                                    onChange={handleSelection}
-                                >
-                                        <option value="pk1m10" >
-                                            10 workstations for 1 month
-                                        </option>
+                {
+                    selectedSub &&
+                    <div className="card-footer">
+                        <div className="d-flex container">
+                            <span className="text-nowrap">Subscription:</span>
+                            <div className="container">
+                                <div className="dropdown">
+                                    <select
+                                        value={selectedSub.id}
+                                        className="form-select"
+                                        onChange={handleSelection}
+                                    >
+                                        {
+                                            subs && subs.map((sub, index) => (
+                                                <option value={sub.id} >
+                                                    {sub.subscriptionName}
+                                                </option>
 
-                                        <option value="pk1y10">
-                                            10 workstations for 1 year
-                                        </option>
-
-                                </select>
+                                            ))
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="container">
+                                <PkSubscription planId={selectedSub.paypalPlanId} amount={selectedSub.price * (100 + selectedSub.tax)/100.0} currency={selectedSub.currency} clientId={clientId} subId={selectedSub.id}/>
                             </div>
                         </div>
-                        <div className="container">
-                            {
-                                selectedSub === "pk1m10" ? <Pk1m10 /> : <Pk1y10 />
-                            }
-                        </div>
                     </div>
-                </div>
+                }
             </div>
             }
             {message && (

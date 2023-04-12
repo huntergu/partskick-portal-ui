@@ -17,6 +17,9 @@ const getClientInfo = (clientId) => {
 const getCpz = () => {
   return axios.get(USER_API_URL + "cpz", { headers: authHeader() });
 }
+const getSubscription = () => {
+  return axios.get(USER_API_URL + "allSubs", { headers: authHeader() });
+}
 const getPublicContent = () => {
   return axios.get(USER_API_URL + "all");
 };
@@ -55,6 +58,29 @@ const registerClient = createAsyncThunk(
     }
 );
 
+const createClientSubscription = createAsyncThunk(
+    "client/purchase",
+    async ({ clientId, subId, paymentId }, thunkAPI) => {
+      try {
+        const response = await axios.post(USER_API_URL + "purchaseSubscription",
+            {clientId, subId, paymentId},
+            { headers: authHeader() });
+        thunkAPI.dispatch(setMessage(response.data));
+        return response.data;
+      } catch (error) {
+        const message =
+            (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+            error.message ||
+            error.toString();
+        console.log(message);
+        thunkAPI.dispatch(setMessage(message));
+        return thunkAPI.rejectWithValue();
+      }
+    }
+);
+
 const userService = {
   getPublicContent,
   getUserBoard,
@@ -64,7 +90,9 @@ const userService = {
   getWorkstationList,
   registerClient,
   getCpz,
-  getClientInfo
+  getClientInfo,
+  getSubscription,
+  createClientSubscription
 };
 
 export default userService
