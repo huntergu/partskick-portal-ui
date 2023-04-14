@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from "yup";
 
-import {clearMessage} from "../slices/message";
+import {clearMessage, setMessage} from "../slices/message";
 import {LOCALES} from "../i18n/locales";
 import {messages} from "../i18n/messages";
 import {Navigate} from "react-router-dom";
@@ -18,7 +18,6 @@ const RegisterClient = () => {
   const [country, setCountry] = useState("");
   const [provstate, setProvstate] = useState("");
   const [province, setProvince] = useState("");
-  const [content, setContent] = useState("");
   const [countries, setCountries] = useState([]);
   const [pz, setPz] = useState();
   const [postCode, setPostCode] = useState("");
@@ -39,11 +38,15 @@ const RegisterClient = () => {
     contactLastName: "",
   });
 
+
+  useEffect(() => {
+    dispatch(clearMessage());
+  }, [dispatch]);
+
   useEffect(() => {
     setIsLoading(true);
     userService.getCpz().then(
         (response) => {
-          setContent(response.data);
           setCountries(response.data.countries);
           setPz(response.data.ps);
           setInitialValues({...initialValues, "country": response.data.countries[0], "province": response.data.ps[response.data.countries[0]][0]})
@@ -51,10 +54,12 @@ const RegisterClient = () => {
         },
         (error) => {
           const _content =
-              (error.response && error.response.data) ||
+              (error.response &&
+                  error.response.data &&
+                  error.response.data.message) ||
               error.message ||
               error.toString();
-          setContent(_content);
+          setMessage(_content);
           setIsLoading(false);
         }
     );

@@ -1,9 +1,15 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {clearMessage} from "../slices/message";
 
 const Profile = () => {
   const { user: currentUser } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+      dispatch(clearMessage());
+  }, [dispatch]);
 
   if (!currentUser) {
     return <Navigate to="/login" />;

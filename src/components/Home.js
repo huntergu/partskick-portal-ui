@@ -25,9 +25,11 @@ const Home = () => {
       },
       (error) => {
         const _content =
-          (error.response && error.response.data) ||
-          error.message ||
-          error.toString();
+            (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+            error.message ||
+            error.toString();
 
         setContent(_content);
         setResponseCode(error.response.status);
@@ -47,9 +49,11 @@ const Home = () => {
       },
       (error) => {
         const _content =
-          (error.response && error.response.data) ||
-          error.message ||
-          error.toString();
+            (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+            error.message ||
+            error.toString();
 
         setContent(_content);
         setResponseCode(error.response.status);

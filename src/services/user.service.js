@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from "./auth-header";
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {setMessage} from "../slices/message";
+import {clearMessage, setMessage} from "../slices/message";
 
 const USER_API_URL = process.env.REACT_APP_API_URL + "/user/";
 
@@ -35,6 +35,9 @@ const getModeratorBoard = () => {
 const getAdminBoard = () => {
   return axios.get(USER_API_URL + "admin", { headers: authHeader() });
 };
+const getClientSubscriptionInfo = (clientId) => {
+  return axios.get(USER_API_URL + "clientSubInfo/" + clientId, { headers: authHeader() });
+};
 
 const registerClient = createAsyncThunk(
     "client/register",
@@ -60,10 +63,10 @@ const registerClient = createAsyncThunk(
 
 const createClientSubscription = createAsyncThunk(
     "client/purchase",
-    async ({ clientId, subId, paymentId }, thunkAPI) => {
+    async ({ clientId, subId, paymentId, startDate }, thunkAPI) => {
       try {
         const response = await axios.post(USER_API_URL + "purchaseSubscription",
-            {clientId, subId, paymentId},
+            {clientId, subId, paymentId, startDate},
             { headers: authHeader() });
         thunkAPI.dispatch(setMessage(response.data));
         return response.data;
@@ -92,7 +95,8 @@ const userService = {
   getCpz,
   getClientInfo,
   getSubscription,
-  createClientSubscription
+  createClientSubscription,
+  getClientSubscriptionInfo
 };
 
 export default userService

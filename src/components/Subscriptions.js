@@ -3,6 +3,8 @@ import userService from "../services/user.service";
 import PkSubscription from "../paypal/PkSubscription";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import {useDispatch} from "react-redux";
+import {clearMessage} from "../slices/message";
 
 const Subscriptions = () => {
     const params = new URLSearchParams(window.location.search);
@@ -13,10 +15,18 @@ const Subscriptions = () => {
     const [selectedSub, setSelectedSub] = useState(null);
     const [subs, setSubs] = useState([]);
     const [selectedDate, setSelectedDate] = useState(new Date());
+    const [clientSubscriptionInfo, setClientSubscriptionInfo] = useState(null);
+    const [refreshSubs, setRefreshSubs] = useState(true);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(clearMessage());
+    }, [dispatch]);
 
     const getMinDate = () => {
         const today = new Date();
-        today.setHours(0, 0, 0, 0);
+        // today.setHours(0, 0, 0, 0);
         return today;
     };
 
@@ -32,7 +42,9 @@ const Subscriptions = () => {
             },
             (error) => {
                 const _content =
-                    (error.response && error.response.data) ||
+                    (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
                     error.message ||
                     error.toString();
                 setMessage(_content);
@@ -50,7 +62,9 @@ const Subscriptions = () => {
             },
             (error) => {
                 const _content =
-                    (error.response && error.response.data) ||
+                    (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
                     error.message ||
                     error.toString();
                 setMessage(_content);
@@ -58,6 +72,30 @@ const Subscriptions = () => {
             }
         );
     }, [clientId]);
+
+    const refreshSubInfo = () => {
+        setIsLoading(true);
+        userService.getClientSubscriptionInfo(clientId).then(
+            (response) => {
+                setClientSubscriptionInfo(response.data);
+                setIsLoading(false);
+            },
+            (error) => {
+                const _content =
+                    (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
+                    error.message ||
+                    error.toString();
+                setMessage(_content);
+                setIsLoading(false);
+            }
+        );
+    }
+
+    useEffect(() => {
+        refreshSubInfo();
+    }, []);
 
     const handleSelection = (event) => {
         setSelectedSub(subs[event.target.selectedIndex]);
@@ -142,12 +180,46 @@ const Subscriptions = () => {
                         </div>
                         <div className="d-flex container">
                             <div className="container">
-                                <PkSubscription planId={selectedSub.paypalPlanId} amount={selectedSub.price * (100 + selectedSub.tax)/100.0} currency={selectedSub.currency} clientId={clientId} subId={selectedSub.id} startDate={selectedDate}/>
+                                <PkSubscription planId={selectedSub.paypalPlanId} amount={selectedSub.price * (100 + selectedSub.tax)/100.0} currency={selectedSub.currency} clientId={clientId} subId={selectedSub.id} startDate={selectedDate} callback={() => refreshSubInfo()} />
                             </div>
                         </div>
                     </div>
                 }
             </div>
+            }
+            {
+                clientSubscriptionInfo &&
+                <div className="row mt-5">
+                    <table className="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Subscription</th>
+                            <th scope="col">Max Workstation</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">End Date</th>
+                            <th scope="col">Payment ID</th>
+                            <th scope="col">Active</th>
+                            <th scope="col">Enrolled Workstation</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {clientSubscriptionInfo instanceof Array && clientSubscriptionInfo.length > 0 && clientSubscriptionInfo.map((cs, index) => (
+                            <tr className={cs.active ? "bg-white" : "bg-light"}>
+                                <th scope="row">{cs.subscriptionName}</th>
+                                <td>{cs.maxWS}</td>
+                                <td>{cs.startDate}</td>
+                                <td>{cs.endDate}</td>
+                                <td>{cs.paymentId}</td>
+                                <td>{cs.active && <span>&#x2713;</span> || <span>X</span>}</td>
+                                <td>{cs.enrolledWS}</td>
+                            </tr>
+
+                        ))}
+                        </tbody>
+                    </table>
+                </div>
+
             }
             {message && (
                 <div className="form-group">
