@@ -13,7 +13,11 @@ const PkSubscription = (props) => {
     const [successful, setSuccessful] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const { message } = useSelector((state) => state.message);
-
+    const userDate = props.startDate;
+    userDate.setHours(0, 0, 0, 0);
+    const utcTimestamp = userDate.getTime() - (userDate.getTimezoneOffset() * 60 * 1000);
+    const utcDate = new Date(utcTimestamp);
+    const dateString = utcDate.toISOString().slice(0,10);
     return (
         <div>
             {isLoading && (
@@ -25,7 +29,8 @@ const PkSubscription = (props) => {
                 currency = {props.currency}
                 createSubscription={(data, actions) => {
                     return actions.subscription.create({
-                        'plan_id': `${props.planId}`,
+                        "plan_id": `${props.planId}`,
+                        "start_time": `${dateString}T00:00:00Z`
                     });
                 }}
                 onApprove={(data, detail) => {
