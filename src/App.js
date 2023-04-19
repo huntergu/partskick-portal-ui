@@ -20,6 +20,7 @@ import ChangePassword from "./components/ChangePassword";
 import ForgetPassword from "./components/ForgetPassword";
 import ResetPassword from "./components/ResetPassword";
 import RegisterClient from "./components/RegisterClient";
+import ClientSubscriptions from "./components/ClientSubscriptions";
 import Subscriptions from "./components/Subscriptions";
 
 const App = () => {
@@ -62,6 +63,12 @@ const App = () => {
             <li className="nav-item">
               <Link to={"/home"} className="nav-link">
                 Home
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link to={"/subscriptions"} className="nav-link">
+                Subscriptions
               </Link>
             </li>
 
@@ -134,7 +141,8 @@ const App = () => {
             <Route path="/forgetPassword" element={<ForgetPassword />} />
             <Route path="/resetPassword" element={<ResetPassword />} />
             <Route path="/registerNewClient" element={<RegisterClient />} />
-            <Route path="//manageSubscription" element={<Subscriptions />} />
+            <Route path="/manageSubscription" element={<ClientSubscriptions />} />
+            <Route path="/subscriptions" element={<Subscriptions />} />
           </Routes>
         </div>
       </div>

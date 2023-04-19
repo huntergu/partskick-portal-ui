@@ -101,13 +101,6 @@ const Home = () => {
                 <span className="spinner-border spinner-border-sm text-success"></span>
             )}
           </div>
-          { content &&
-              <div className="container">
-                <Link to={`/manageSubscription?c=${selectedOption}`}>
-                  <button className="btn-primary">Manage Subscription</button>
-                </Link>
-              </div>
-          }
           <div className="container">
             <Link to="/registerNewClient">
               <button className="btn-primary">Register New Client</button>
@@ -121,7 +114,7 @@ const Home = () => {
                   role="alert"
               >
                 {
-                  (content instanceof String) ? content : (content.hasOwnProperty("message") ? content.message : "something wrong")
+                  (typeof content) == "string" ? content : (content.hasOwnProperty("message") ? content.message : "something wrong")
                 }
               </div>
             </div>

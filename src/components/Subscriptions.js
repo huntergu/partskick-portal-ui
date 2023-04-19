@@ -1,238 +1,194 @@
-import React, {useEffect, useState} from "react";
+import React, { useState, useEffect } from "react";
+
+import UserService from "../services/user.service";
+import {Link, Navigate} from "react-router-dom";
+import {useSelector} from "react-redux";
+import ListItemCB from "./ListItemCB";
 import userService from "../services/user.service";
-import PkSubscription from "../paypal/PkSubscription";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import {useDispatch} from "react-redux";
-import {clearMessage} from "../slices/message";
 
 const Subscriptions = () => {
-    const params = new URLSearchParams(window.location.search);
-    const clientId = params.get('c');
-    const [isLoading, setIsLoading] = useState(false);
-    const [clientInfo, setClientInfo] = useState(null);
-    const [message, setMessage] = useState(null);
-    const [selectedSub, setSelectedSub] = useState(null);
-    const [subs, setSubs] = useState([]);
-    const [selectedDate, setSelectedDate] = useState(new Date());
-    const [clientSubscriptionInfo, setClientSubscriptionInfo] = useState(null);
-    const [refreshSubs, setRefreshSubs] = useState(true);
+  const [content, setContent] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [responseCode, setResponseCode] = useState(400);
+  const { user: currentUser } = useSelector((state) => state.auth);
+  const [clientsSubs, setClientsSubs] = useState([]);
+  const [checkedItems, setCheckedItems] = useState([]);
+  const [selectedSub, setSelectedSub] = useState(null);
+  const [subs, setSubs] = useState([]);
+  const [message, setMessage] = useState(null);
+  const [displaySubs, setDisplaySubs] = useState([]);
 
-    const dispatch = useDispatch();
+  useEffect(() => {
+    setLoading(true);
+    UserService.getClientList().then(
+      (response) => {
+        setContent(response.data);
+        setLoading(false);
+        setResponseCode(200);
+      },
+      (error) => {
+        const _content =
+            (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+            error.message ||
+            error.toString();
 
-    useEffect(() => {
-        dispatch(clearMessage());
-    }, [dispatch]);
+        setContent(_content);
+        setResponseCode(error.response.status);
+        setLoading(false);
+      }
+    );
+  }, []);
 
-    const getMinDate = () => {
-        const today = new Date();
-        // today.setHours(0, 0, 0, 0);
-        return today;
-    };
+  useEffect(() => {
+    if (!currentUser) return;
+    setLoading(true);
+    UserService.getClientsSubs().then(
+      (response) => {
+        setClientsSubs(response.data);
+        setResponseCode(200);
+        setLoading(false);
+      },
+      (error) => {
+        const _content =
+            (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+            error.message ||
+            error.toString();
 
-    useEffect(() => {
-        setIsLoading(true);
-        userService.getSubscription().then(
-            (response) => {
-                setSubs(response.data);
-                if (response.data && response.data instanceof Array && response.data.length > 0) {
-                    setSelectedSub(response.data[0])
-                }
-                setIsLoading(false);
-            },
-            (error) => {
-                const _content =
-                    (error.response &&
-                        error.response.data &&
-                        error.response.data.message) ||
-                    error.message ||
-                    error.toString();
-                setMessage(_content);
-                setIsLoading(false);
-            }
-        );
-    }, []);
+        setContent(_content);
+        setResponseCode(error.response.status);
+        setLoading(false);
+      }
+    );
+  }, [content, currentUser]);
 
-    useEffect(() => {
-        setIsLoading(true);
-        userService.getClientInfo(clientId).then(
-            (response) => {
-                setClientInfo(response.data);
-                setIsLoading(false);
-            },
-            (error) => {
-                const _content =
-                    (error.response &&
-                        error.response.data &&
-                        error.response.data.message) ||
-                    error.message ||
-                    error.toString();
-                setMessage(_content);
-                setIsLoading(false);
-            }
-        );
-    }, [clientId]);
+  useEffect(() => {
+    setLoading(true);
+    userService.getSubscription().then(
+        (response) => {
+          setSubs(response.data);
+          setLoading(false);
+        },
+        (error) => {
+          const _content =
+              (error.response &&
+                  error.response.data &&
+                  error.response.data.message) ||
+              error.message ||
+              error.toString();
+          setMessage(_content);
+          setLoading(false);
+        }
+    );
+  }, []);
 
-    const refreshSubInfo = () => {
-        setIsLoading(true);
-        userService.getClientSubscriptionInfo(clientId).then(
-            (response) => {
-                setClientSubscriptionInfo(response.data);
-                setIsLoading(false);
-            },
-            (error) => {
-                const _content =
-                    (error.response &&
-                        error.response.data &&
-                        error.response.data.message) ||
-                    error.message ||
-                    error.toString();
-                setMessage(_content);
-                setIsLoading(false);
-            }
-        );
+  useEffect(() => {
+    console.log(checkedItems);
+  }, [checkedItems])
+
+  if (!currentUser) {
+    return <Navigate to="/login" />;
+  }
+
+  const handleCheck = (itemId, isChecked) => {
+    if (isChecked) {
+      setCheckedItems([...checkedItems, itemId]);
+    } else {
+      setCheckedItems(checkedItems.filter((id) => id !== itemId));
     }
+  };
 
-    useEffect(() => {
-        refreshSubInfo();
-    }, []);
-
-    const handleSelection = (event) => {
-        setSelectedSub(subs[event.target.selectedIndex]);
-    }
-    return (
+  return (
+      <div>
         <div className="container">
-            {clientInfo &&
-            <div className="card">
-                <div className="card-header">Client Information{isLoading && (
-                    <span className="spinner-border spinner-border-sm"></span>
-                )}</div>
-                <div className="card-body">
-                    <div className="form-group">
-                        <label>{clientInfo.clientName}</label>
-                    </div>
-
-                    <div className="form-group">
-                        <label>{clientInfo.address1}&nbsp;{clientInfo.address2}, {clientInfo.city}</label>
-                        <label>{clientInfo.province}&nbsp;{clientInfo.postCode}</label>
-                    </div>
-                    <div className="form-group">
-                        <label>{clientInfo.country}</label>
-                    </div>
-                    <div className="form-group">
-                        <label>Contact Person:</label>
-                        <label>{clientInfo.contactPerson}</label>
-                    </div>
-                    <div className="form-group">
-                        <label>{clientInfo.phone}</label>
-                    </div>
-                    <div className="form-group">
-                        <label>{clientInfo.email}</label>
-                    </div>
+          <div className="card">
+            <div className="card-header">Clients {loading && (
+                <span className="spinner-border spinner-border-sm"></span>
+            )}</div>
+            <div className="card-body">
+              <div className="d-flex container">
+                <div className="container">
+                  {
+                      content && content instanceof Array && content.length > 0 && content.map((c, index) => (
+                          <ListItemCB key={c.oid} item={c}  handleCheck={handleCheck} />
+                      ))
+                  }
+                </div>
+                <div className="container">
+                    <button className="btn-primary">Choose Plan</button>
                 </div>
                 {
-                    selectedSub &&
-                    <div className="card-footer">
-                        <div className="d-flex container mb-3">
-                            <span className="text-nowrap mr-3">Subscription:</span>
-                            <div className="mr-3">
-                                <div className="dropdown">
-                                    <select
-                                        value={selectedSub.id}
-                                        className="form-select"
-                                        onChange={handleSelection}
-                                    >
-                                        {
-                                            subs && subs.map((sub, index) => (
-                                                <option value={sub.id} >
-                                                    {sub.subscriptionName}
-                                                </option>
+                    displaySubs && displaySubs.length > 0 &&
+                    <div className="mr-3">
+                      <div className="dropdown">
+                        <select
+                            value={selectedSub.id}
+                            className="form-select"
+                            // onChange={handleSelection}
+                        >
+                          {
+                            displaySubs.map((sub, index) => (
+                                  <option value={sub.id} >
+                                    {sub.subscriptionName}
+                                  </option>
 
-                                            ))
-                                        }
-                                    </select>
-                                </div>
-                            </div>
-                            <span className="text-nowrap mr-3">Start Date:</span>
-                            <div>
-                                <DatePicker
-                                    selected={selectedDate}
-                                    onChange={date => setSelectedDate(date)}
-                                    minDate={getMinDate()}
-                                    popperPlacement="top-start"
-                                    popperModifiers={{
-                                        preventOverflow: {
-                                            enabled: true,
-                                            escapeWithReference: false,
-                                            boundariesElement: 'viewport',
-                                        },
-                                        flip: {
-                                            enabled: true,
-                                        },
-                                        offset: {
-                                            enabled: true,
-                                            offset: '5px, 10px'
-                                        },
-                                    }}
-                                    style={{zIndex: 9999}}
-                                />
-                            </div>
-                        </div>
-                        <div className="d-flex container">
-                            <div className="container">
-                                <PkSubscription planId={selectedSub.paypalPlanId} amount={selectedSub.price * (100 + selectedSub.tax)/100.0} currency={selectedSub.currency} clientId={clientId} subId={selectedSub.id} startDate={selectedDate} callback={() => refreshSubInfo()} />
-                            </div>
-                        </div>
+                              ))
+                          }
+                        </select>
+                      </div>
                     </div>
                 }
+              </div>
+
             </div>
-            }
-            {
-                clientSubscriptionInfo &&
-                <div className="row mt-5">
-                    <table className="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">Subscription</th>
-                            <th scope="col">Max Workstation</th>
-                            <th scope="col">Start Date</th>
-                            <th scope="col">End Date</th>
-                            <th scope="col">Payment ID</th>
-                            <th scope="col">Active</th>
-                            <th scope="col">Enrolled Workstation</th>
-
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {clientSubscriptionInfo instanceof Array && clientSubscriptionInfo.length > 0 && clientSubscriptionInfo.map((cs, index) => (
-                            <tr className={cs.active ? "bg-white" : "bg-light"}>
-                                <th scope="row">{cs.subscriptionName}</th>
-                                <td>{cs.maxWS}</td>
-                                <td>{cs.startDate}</td>
-                                <td>{cs.endDate}</td>
-                                <td>{cs.paymentId}</td>
-                                <td>{cs.active && <span>&#x2713;</span> || <span>X</span>}</td>
-                                <td>{cs.enrolledWS}</td>
-                            </tr>
-
-                        ))}
-                        </tbody>
-                    </table>
-                </div>
-
-            }
-            {message && (
-                <div className="form-group">
-                    <div
-                        className="alert alert-danger"
-                        role="alert"
-                    >
-                        {message}
-                    </div>
-                </div>
-            )}
+          </div>
         </div>
-    )
-}
+        {responseCode >= 400 && content && (
+            <div className="form-group pt-50">
+              <div
+                  className="alert alert-danger"
+                  role="alert"
+              >
+                {
+                  (typeof content) == "string" ? content : (content.hasOwnProperty("message") ? content.message : "something wrong")
+                }
+              </div>
+            </div>
+        )}
+
+        <div className="row mt-5">
+          <table className="table">
+            <thead>
+            <tr>
+              <th scope="col">Client</th>
+              <th scope="col">Subscription</th>
+              <th scope="col">Start Date</th>
+              <th scope="col">End Date</th>
+              <th scope="col">Payment ID</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {clientsSubs && clientsSubs instanceof Array && clientsSubs.length > 0 && clientsSubs.map((cs, index) => (
+                <tr>
+                  <th scope="row">{cs.clientName}</th>
+                  <td>{cs.subscriptionName}</td>
+                  <td>{new Date(cs.startDate).toLocaleDateString()}</td>
+                  <td>{new Date(cs.endDate).toLocaleDateString()}</td>
+                  <td>{cs.paymentId}</td>
+                </tr>
+
+            ))}
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+  );
+};
 
 export default Subscriptions;
