@@ -4,7 +4,6 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import {clearMessage, setMessage} from "../slices/message";
 
 const USER_API_URL = process.env.REACT_APP_API_URL + "/user/";
-
 const getWorkstationList = (clientId) => {
   return axios.get(USER_API_URL + clientId + "/workstation", { headers: authHeader() });
 }
@@ -66,10 +65,10 @@ const registerClient = createAsyncThunk(
 
 const createClientSubscription = createAsyncThunk(
     "client/purchase",
-    async ({ clientId, subId, paymentId, startDate }, thunkAPI) => {
+    async ({ clientIds, subId, paymentId, startDate }, thunkAPI) => {
       try {
         const response = await axios.post(USER_API_URL + "purchaseSubscription",
-            {clientId, subId, paymentId, startDate},
+            {clientIds, subId, paymentId, startDate},
             { headers: authHeader() });
         thunkAPI.dispatch(setMessage(response.data));
         return response.data;

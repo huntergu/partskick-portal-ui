@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 
 import UserService from "../services/user.service";
 import {Link, Navigate} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import ListItemCB from "./ListItemCB";
 import userService from "../services/user.service";
+import DatePicker from "react-datepicker";
+import {clearMessage} from "../slices/message";
+import PaypalSubscription from "../paypal/PaypalSubscription";
 
 const Subscriptions = () => {
   const [content, setContent] = useState("");
@@ -17,6 +20,26 @@ const Subscriptions = () => {
   const [subs, setSubs] = useState([]);
   const [message, setMessage] = useState(null);
   const [displaySubs, setDisplaySubs] = useState([]);
+  const [showSubs, setShowSubs] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [paypalPlanId, setPaypalPlanId] = useState(null);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(clearMessage());
+  }, [dispatch]);
+  const getMinDate = () => {
+    const today = new Date();
+    // today.setHours(0, 0, 0, 0);
+    return today;
+  };
+
+  const currencyFormatter = new Intl.NumberFormat('en-US', {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2
+  });
 
   useEffect(() => {
     setLoading(true);
@@ -43,26 +66,7 @@ const Subscriptions = () => {
 
   useEffect(() => {
     if (!currentUser) return;
-    setLoading(true);
-    UserService.getClientsSubs().then(
-      (response) => {
-        setClientsSubs(response.data);
-        setResponseCode(200);
-        setLoading(false);
-      },
-      (error) => {
-        const _content =
-            (error.response &&
-                error.response.data &&
-                error.response.data.message) ||
-            error.message ||
-            error.toString();
-
-        setContent(_content);
-        setResponseCode(error.response.status);
-        setLoading(false);
-      }
-    );
+    refreshSubInfo();
   }, [content, currentUser]);
 
   useEffect(() => {
@@ -86,7 +90,8 @@ const Subscriptions = () => {
   }, []);
 
   useEffect(() => {
-    console.log(checkedItems);
+    // console.log(checkedItems);
+    setShowSubs(false);
   }, [checkedItems])
 
   if (!currentUser) {
@@ -99,6 +104,56 @@ const Subscriptions = () => {
     } else {
       setCheckedItems(checkedItems.filter((id) => id !== itemId));
     }
+  };
+
+  const handleShowPlan = () => {
+    if (checkedItems.length > 0) {
+      let dis = subs.filter(s => s.multiShop === checkedItems.length);
+      if (dis.length > 0) {
+        setDisplaySubs(dis);
+        setSelectedSub(dis[0]);
+        setPaypalPlanId(dis[0].paypalPlanId);
+        setShowSubs(true);
+      } else {
+        alert("No available plan for " + checkedItems.length + " shops");
+      }
+    } else {
+      alert("Please select at least one shop");
+    }
+  }
+
+  const refreshSubInfo = () => {
+    setLoading(true);
+    UserService.getClientsSubs().then(
+        (response) => {
+          setClientsSubs(response.data);
+          setResponseCode(200);
+          setLoading(false);
+        },
+        (error) => {
+          const _content =
+              (error.response &&
+                  error.response.data &&
+                  error.response.data.message) ||
+              error.message ||
+              error.toString();
+
+          setContent(_content);
+          setResponseCode(error.response.status);
+          setLoading(false);
+        }
+    );
+  }
+
+  const handleSelection = (event) => {
+    setSelectedSub(displaySubs[event.target.selectedIndex]);
+    setPaypalPlanId(displaySubs[event.target.selectedIndex].paypalPlanId);
+  }
+
+  const centerStyle = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
   };
 
   return (
@@ -118,27 +173,61 @@ const Subscriptions = () => {
                   }
                 </div>
                 <div className="container">
-                    <button className="btn-primary">Choose Plan</button>
+                  <div className="d-flex justify-content-center">
+                    <button className="btn btn-primary" style={centerStyle} onClick={handleShowPlan}>Show Available Plans</button>
+                  </div>
+                  {
+                    showSubs &&
+                      <div className="container mt-3">
+                          <PaypalSubscription sd={selectedDate} pid={paypalPlanId} clientIds={checkedItems} subId={selectedSub.id} callback={() => refreshSubInfo()} />
+                      </div>
+                  }
+
                 </div>
                 {
-                    displaySubs && displaySubs.length > 0 &&
+                    showSubs && displaySubs && displaySubs.length > 0 &&
                     <div className="mr-3">
                       <div className="dropdown">
                         <select
                             value={selectedSub.id}
                             className="form-select"
-                            // onChange={handleSelection}
+                            onChange={handleSelection}
                         >
                           {
                             displaySubs.map((sub, index) => (
                                   <option value={sub.id} >
-                                    {sub.subscriptionName}
+                                    {sub.subscriptionName + "  " + currencyFormatter.format(sub.price)}
                                   </option>
 
                               ))
                           }
                         </select>
                       </div>
+                      <span className="text-nowrap mr-3">Start Date:</span>
+                      <div>
+                        <DatePicker
+                            selected={selectedDate}
+                            onChange={date => setSelectedDate(date)}
+                            minDate={getMinDate()}
+                            popperPlacement="top-start"
+                            popperModifiers={{
+                              preventOverflow: {
+                                enabled: true,
+                                escapeWithReference: false,
+                                boundariesElement: 'viewport',
+                              },
+                              flip: {
+                                enabled: true,
+                              },
+                              offset: {
+                                enabled: true,
+                                offset: '5px, 10px'
+                              },
+                            }}
+                            style={{zIndex: 9999}}
+                        />
+                      </div>
+
                     </div>
                 }
               </div>
@@ -153,7 +242,7 @@ const Subscriptions = () => {
                   role="alert"
               >
                 {
-                  (typeof content) == "string" ? content : (content.hasOwnProperty("message") ? content.message : "something wrong")
+                  (typeof content) === "string" ? content : (content.hasOwnProperty("message") ? content.message : "something wrong")
                 }
               </div>
             </div>

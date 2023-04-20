@@ -22,6 +22,7 @@ import ResetPassword from "./components/ResetPassword";
 import RegisterClient from "./components/RegisterClient";
 import ClientSubscriptions from "./components/ClientSubscriptions";
 import Subscriptions from "./components/Subscriptions";
+import process from 'process/browser';
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);

@@ -147,7 +147,7 @@ const ClientSubscriptions = () => {
                                         {
                                             subs && subs.map((sub, index) => (
                                                 <option value={sub.id} >
-                                                    {sub.subscriptionName}
+                                                    {sub.subscriptionName + "  " + sub.price}
                                                 </option>
 
                                             ))

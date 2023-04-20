@@ -8,7 +8,7 @@ import userService from "../services/user.service";
 import {useDispatch, useSelector} from "react-redux";
 import {clearMessage} from "../slices/message";
 
-const ButtonWrapper = ({ type, startDate, planId, clientId, subId, callback }) => {
+const ButtonWrapper = ({ type, startDate, planId, clientIds, subId, callback }) => {
     const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
     const [successful, setSuccessful] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -81,7 +81,7 @@ const ButtonWrapper = ({ type, startDate, planId, clientId, subId, callback }) =
                 setSuccessful(false);
                 setIsLoading(true);
 
-                reduxDispatch(userService.createClientSubscription({clientId, subId, paymentId, startDate}))
+                reduxDispatch(userService.createClientSubscription({clientIds, subId, paymentId, startDate}))
                     .unwrap()
                     .then(() => {
 
@@ -126,16 +126,18 @@ const ButtonWrapper = ({ type, startDate, planId, clientId, subId, callback }) =
         </div>);
 }
 const PaypalSubscription = (props) => {
+    const PAYPAL_CLIENT_ID = process.env.REACT_APP_PAYPAL_CLIENT_ID;
+
     return (
         <PayPalScriptProvider
             options={{
-                "client-id": "AXL7AHsefNQFuCcpnjKGjsgE1_69VFRjHA1C4o3WmL3z0tVllUMtI-WmPy15GYxELf8IHrpwFEeoUlBk",
+                "client-id": PAYPAL_CLIENT_ID,
                 components: "buttons",
                 intent: "subscription",
                 vault: true,
             }}
         >
-            <ButtonWrapper type="subscription" startDate={props.sd} planId={props.pid} clientId={props.clientId} subId={props.subId} callback={props.callback} />
+            <ButtonWrapper type="subscription" startDate={props.sd} planId={props.pid} clientIds={props.clientIds} subId={props.subId} callback={props.callback} />
         </PayPalScriptProvider>
     );
 }
