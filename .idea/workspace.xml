@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="multi clients same subscription">
-      <change beforePath="$PROJECT_DIR$/.env.development" beforeDir="false" afterPath="$PROJECT_DIR$/.env.development" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.production" beforeDir="false" afterPath="$PROJECT_DIR$/.env.production" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ClientSubscriptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ClientSubscriptions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Subscriptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Subscriptions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/paypal/PaypalSubscription.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/paypal/PaypalSubscription.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/user.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/user.service.js" afterDir="false" />
-    </list>
+    <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="multi clients same subscription" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -117,7 +107,7 @@
       <workItem from="1681768775617" duration="12996000" />
       <workItem from="1681864105728" duration="9975000" />
       <workItem from="1681955570607" duration="3850000" />
-      <workItem from="1681959446081" duration="5072000" />
+      <workItem from="1681959446081" duration="5215000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1680323657807</created>
@@ -231,7 +221,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681876640804</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="multi clients same subscription">
+      <created>1681964668282</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1681964668282</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
