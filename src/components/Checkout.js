@@ -7,8 +7,9 @@ import ListItemCB from "./ListItemCB";
 import DatePicker from "react-datepicker";
 import {clearMessage} from "../slices/message";
 import PaypalSubscription from "../paypal/PaypalSubscription";
+import PaypalCheckout from "../paypal/PaypalCheckout";
 
-const Subscriptions = () => {
+const Checkout = () => {
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
   const [responseCode, setResponseCode] = useState(400);
@@ -21,7 +22,9 @@ const Subscriptions = () => {
   const [displaySubs, setDisplaySubs] = useState([]);
   const [showSubs, setShowSubs] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [paypalPlanId, setPaypalPlanId] = useState(null);
+  const [amount, setAmount] = useState(0);
+  const [currency, setCurrency] = useState("CAD");
+  const [tax, setTax] = useState("CAD");
 
   const dispatch = useDispatch();
 
@@ -111,7 +114,9 @@ const Subscriptions = () => {
       if (dis.length > 0) {
         setDisplaySubs(dis);
         setSelectedSub(dis[0]);
-        setPaypalPlanId(dis[0].paypalPlanId);
+        setCurrency(dis[0].currency);
+        setAmount(dis[0].price);
+        setTax(dis[0].tax);
         setShowSubs(true);
       } else {
         alert("No available plan for " + checkedItems.length + " shops");
@@ -146,7 +151,9 @@ const Subscriptions = () => {
 
   const handleSelection = (event) => {
     setSelectedSub(displaySubs[event.target.selectedIndex]);
-    setPaypalPlanId(displaySubs[event.target.selectedIndex].paypalPlanId);
+    setCurrency(displaySubs[event.target.selectedIndex].currency);
+    setAmount(displaySubs[event.target.selectedIndex].price);
+    setTax(displaySubs[event.target.selectedIndex].tax);
   }
 
   const centerStyle = {
@@ -177,9 +184,9 @@ const Subscriptions = () => {
                   </div>
                   {
                     showSubs &&
-                      <div className="container mt-3">
-                          <PaypalSubscription sd={selectedDate} pid={paypalPlanId} clientIds={checkedItems} subId={selectedSub.id} callback={() => refreshSubInfo()} />
-                      </div>
+                        <div className="container mt-3">
+                          <PaypalCheckout startDate={selectedDate} clientIds={checkedItems} subId={selectedSub.id} amount={amount} tax={tax} currency={currency} callback={() => refreshSubInfo()} />
+                        </div>
                   }
 
                 </div>
@@ -279,4 +286,4 @@ const Subscriptions = () => {
   );
 };
 
-export default Subscriptions;
+export default Checkout;

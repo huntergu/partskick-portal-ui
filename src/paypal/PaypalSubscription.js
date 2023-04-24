@@ -60,7 +60,7 @@ const ButtonWrapper = ({ type, startDate, planId, clientIds, subId, callback }) 
 
     return (
         <div>
-            {isPending ? <div className="spinner" /> : null}
+            {isPending || isLoading ? <div className="spinner" /> : null}
             <PayPalButtons
             createSubscription={(data, actions) => {
                 return actions.subscription

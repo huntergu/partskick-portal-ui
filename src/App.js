@@ -23,6 +23,7 @@ import RegisterClient from "./components/RegisterClient";
 import ClientSubscriptions from "./components/ClientSubscriptions";
 import Subscriptions from "./components/Subscriptions";
 import process from 'process/browser';
+import Checkout from "./components/Checkout";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -70,6 +71,11 @@ const App = () => {
             <li className="nav-item">
               <Link to={"/subscriptions"} className="nav-link">
                 Subscriptions
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to={"/checkout"} className="nav-link">
+                Checkout
               </Link>
             </li>
 
@@ -144,6 +150,7 @@ const App = () => {
             <Route path="/registerNewClient" element={<RegisterClient />} />
             <Route path="/manageSubscription" element={<ClientSubscriptions />} />
             <Route path="/subscriptions" element={<Subscriptions />} />
+            <Route path="/checkout" element={<Checkout />} />
           </Routes>
         </div>
       </div>
