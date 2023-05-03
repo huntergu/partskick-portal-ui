@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../common/AuthInterceptor";
 import authHeader from "./auth-header";
 
 const USER_API_URL = process.env.REACT_APP_API_URL + "/user/";

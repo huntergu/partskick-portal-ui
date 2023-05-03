@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../common/AuthInterceptor";
 import authHeader from "./auth-header";
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {clearMessage, setMessage} from "../slices/message";
