@@ -6,7 +6,6 @@ import {useDispatch, useSelector} from "react-redux";
 import ListItemCB from "./ListItemCB";
 import DatePicker from "react-datepicker";
 import {clearMessage} from "../slices/message";
-import PaypalSubscription from "../paypal/PaypalSubscription";
 
 const Subscriptions = () => {
   const [content, setContent] = useState("");
@@ -155,6 +154,32 @@ const Subscriptions = () => {
     alignItems: "center"
   };
 
+  const handleSubscribe = (clientIds, sub, startDate) => {
+    setLoading(true);
+    let subId = sub.id;
+
+    userService.preLoadSubscription(clientIds, subId, startDate).then(
+        (response) => {
+          console.log(response.data);
+          setResponseCode(200);
+          setLoading(false);
+        },
+        (error) => {
+          const _content =
+              (error.response &&
+                  error.response.data &&
+                  error.response.data.message) ||
+              error.message ||
+              error.toString();
+
+          setContent(_content);
+          setResponseCode(error.response.status);
+          setLoading(false);
+        }
+    );
+
+  }
+
   return (
       <div>
         <div className="container">
@@ -178,7 +203,7 @@ const Subscriptions = () => {
                   {
                     showSubs &&
                       <div className="container mt-3">
-                          <PaypalSubscription sd={selectedDate} pid={paypalPlanId} clientIds={checkedItems} subId={selectedSub.id} callback={() => refreshSubInfo()} />
+                            <button className="btn-primary" onClick={() => handleSubscribe(checkedItems, selectedSub, selectedDate)}>Subscribe</button>
                       </div>
                   }
 
