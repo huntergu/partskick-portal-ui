@@ -6,8 +6,16 @@ import {useDispatch, useSelector} from "react-redux";
 import ListItemCB from "./ListItemCB";
 import DatePicker from "react-datepicker";
 import {clearMessage} from "../slices/message";
+import monerisService from "../services/moneris.service";
 
 const Subscriptions = () => {
+  const getMinDate = () => {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    return tomorrow;
+  };
+
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
   const [responseCode, setResponseCode] = useState(400);
@@ -19,23 +27,17 @@ const Subscriptions = () => {
   const [message, setMessage] = useState(null);
   const [displaySubs, setDisplaySubs] = useState([]);
   const [showSubs, setShowSubs] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [paypalPlanId, setPaypalPlanId] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(getMinDate());
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(clearMessage());
   }, [dispatch]);
-  const getMinDate = () => {
-    const today = new Date();
-    // today.setHours(0, 0, 0, 0);
-    return today;
-  };
 
   const currencyFormatter = new Intl.NumberFormat('en-US', {
     style: "currency",
-    currency: "USD",
+    currency: "CAD",
     minimumFractionDigits: 2
   });
 
@@ -110,7 +112,6 @@ const Subscriptions = () => {
       if (dis.length > 0) {
         setDisplaySubs(dis);
         setSelectedSub(dis[0]);
-        setPaypalPlanId(dis[0].paypalPlanId);
         setShowSubs(true);
       } else {
         alert("No available plan for " + checkedItems.length + " shops");
@@ -145,7 +146,6 @@ const Subscriptions = () => {
 
   const handleSelection = (event) => {
     setSelectedSub(displaySubs[event.target.selectedIndex]);
-    setPaypalPlanId(displaySubs[event.target.selectedIndex].paypalPlanId);
   }
 
   const centerStyle = {
@@ -158,7 +158,7 @@ const Subscriptions = () => {
     setLoading(true);
     let subId = sub.id;
 
-    userService.preLoadSubscription(clientIds, subId, startDate).then(
+    monerisService.preLoad(clientIds, subId, startDate).then(
         (response) => {
           console.log(response.data);
           setResponseCode(200);

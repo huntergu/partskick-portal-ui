@@ -87,7 +87,7 @@ const createClientSubscription = createAsyncThunk(
 );
 
 const preLoadSubscription = (clientIds, subId, startDate) => {
-    return axios.post(USER_API_URL + "preLoadSubscription",
+    return axios.post(USER_API_URL + "preLoad",
         {clientIds, subId, startDate},
         { headers: authHeader() });
 };
