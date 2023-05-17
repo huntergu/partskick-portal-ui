@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="moneris - part1">
+    <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="moneris - part2">
+      <change beforePath="$PROJECT_DIR$/.env.development" beforeDir="false" afterPath="$PROJECT_DIR$/.env.development" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Checkout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Checkout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Subscriptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Subscriptions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/moneris.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/moneris.service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +49,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;feature/moneris&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/moneris&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/dev/partskick-portal-ui/src/services&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -69,6 +73,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\dev\partskick-portal-ui\src\services" />
       <recent name="C:\dev\partskick-portal-ui\src\components" />
       <recent name="C:\dev\partskick-portal-ui" />
       <recent name="C:\dev\partskick-portal-ui\src\paypal" />
@@ -123,6 +128,8 @@
       <workItem from="1683158916692" duration="79000" />
       <workItem from="1683682675121" duration="6630000" />
       <workItem from="1683772738695" duration="635000" />
+      <workItem from="1684201428141" duration="4976000" />
+      <workItem from="1684277952084" duration="8633000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1680323657807</created>
@@ -271,7 +278,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683691399463</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="moneris - part2">
+      <created>1684211837493</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1684211837493</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -309,7 +323,20 @@
     <MESSAGE value="add checkout" />
     <MESSAGE value="logout if token expired" />
     <MESSAGE value="moneris - part1" />
-    <option name="LAST_COMMIT_MESSAGE" value="moneris - part1" />
+    <MESSAGE value="moneris - part2" />
+    <option name="LAST_COMMIT_MESSAGE" value="moneris - part2" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/components/Checkout.js</url>
+          <line>59</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

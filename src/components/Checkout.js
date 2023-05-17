@@ -1,288 +1,119 @@
-import React, { useState, useEffect } from "react";
-
-import userService from "../services/user.service";
-import {Link, Navigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import React, {useState, useEffect, useRef} from "react";
+import monerisService from "../services/moneris.service";
 import ListItemCB from "./ListItemCB";
 import DatePicker from "react-datepicker";
-import {clearMessage} from "../slices/message";
-import PaypalSubscription from "../paypal/PaypalSubscription";
-import PaypalCheckout from "../paypal/PaypalCheckout";
+import {ErrorMessage, Field, Form} from "formik";
 
 const Checkout = () => {
-  const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
-  const [responseCode, setResponseCode] = useState(400);
-  const { user: currentUser } = useSelector((state) => state.auth);
-  const [clientsSubs, setClientsSubs] = useState([]);
-  const [checkedItems, setCheckedItems] = useState([]);
-  const [selectedSub, setSelectedSub] = useState(null);
-  const [subs, setSubs] = useState([]);
-  const [message, setMessage] = useState(null);
-  const [displaySubs, setDisplaySubs] = useState([]);
-  const [showSubs, setShowSubs] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [amount, setAmount] = useState(0);
-  const [currency, setCurrency] = useState("CAD");
-  const [tax, setTax] = useState("CAD");
+  const [content, setContent] = useState(null);
+  const [message1, setMessage1] = useState("");
+  const [message2, setMessage2] = useState("");
+  const formRef = useRef(null);
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(clearMessage());
-  }, [dispatch]);
-  const getMinDate = () => {
-    const today = new Date();
-    // today.setHours(0, 0, 0, 0);
-    return today;
+  const handleContinue = () => {
+    // Handle continue button click
+    console.log('Continue clicked');
+      if (formRef.current) {
+          formRef.current.submit();
+      }
   };
 
-  const currencyFormatter = new Intl.NumberFormat('en-US', {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 2
-  });
+  const handleBack = () => {
+    // Handle back button click
+    console.log('Cancel clicked');
+    window.close();
+  };
+
+  const storedOrderId = localStorage.getItem("orderId");
 
   useEffect(() => {
+    if (!storedOrderId) {
+      alert("failed to retrieve order ID.")
+      window.close();
+    }
     setLoading(true);
-    userService.getClientList().then(
+    monerisService.fetchOrder(storedOrderId).then(
       (response) => {
-        setContent(response.data);
+        var data = response.data;
+        setContent(data);
+        console.log(data);
+        if (data.recurUnit === "eom") {
+            // monthly
+            if (data.recurStartNow) {
+                setMessage1("Amount will be charged now is " + data.chargeTotal.toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: 'CAD',
+                }) + ", this is the subscription fee from " + data.selectedStartDate + " - " + data.recurStartDate);
+            }
+           setMessage2("Amount will be charged on " + data.recurStartDate + " is " + data.recurAmount.toLocaleString('en-US', {
+               style: 'currency',
+               currency: 'CAD',
+           }) + " (same amount will be charged on every month end for following month's subscription)");
+        } else {
+            // annual
+            setMessage1("Amount will be charged now is " +  data.chargeTotal.toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'CAD',
+            }) + " (Subscription fee for " + data.selectedStartDate + " - " + data.recurStartDate + ", and the same amount will be charged every year)");
+        }
         setLoading(false);
-        setResponseCode(200);
       },
       (error) => {
-        const _content =
-            (error.response &&
-                error.response.data &&
-                error.response.data.message) ||
-            error.message ||
-            error.toString();
-
-        setContent(_content);
-        setResponseCode(error.response.status);
         setLoading(false);
+        alert("failed to retrieve order.")
+        window.close();
       }
     );
   }, []);
 
-  useEffect(() => {
-    if (!currentUser) return;
-    refreshSubInfo();
-  }, [content, currentUser]);
-
-  useEffect(() => {
-    setLoading(true);
-    userService.getSubscription().then(
-        (response) => {
-          setSubs(response.data);
-          setLoading(false);
-        },
-        (error) => {
-          const _content =
-              (error.response &&
-                  error.response.data &&
-                  error.response.data.message) ||
-              error.message ||
-              error.toString();
-          setMessage(_content);
-          setLoading(false);
-        }
-    );
-  }, []);
-
-  useEffect(() => {
-    // console.log(checkedItems);
-    setShowSubs(false);
-  }, [checkedItems])
-
-  if (!currentUser) {
-    return <Navigate to="/login" />;
-  }
-
-  const handleCheck = (itemId, isChecked) => {
-    if (isChecked) {
-      setCheckedItems([...checkedItems, itemId]);
-    } else {
-      setCheckedItems(checkedItems.filter((id) => id !== itemId));
-    }
-  };
-
-  const handleShowPlan = () => {
-    if (checkedItems.length > 0) {
-      let dis = subs.filter(s => s.multiShop === checkedItems.length);
-      if (dis.length > 0) {
-        setDisplaySubs(dis);
-        setSelectedSub(dis[0]);
-        setCurrency(dis[0].currency);
-        setAmount(dis[0].price);
-        setTax(dis[0].tax);
-        setShowSubs(true);
-      } else {
-        alert("No available plan for " + checkedItems.length + " shops");
-      }
-    } else {
-      alert("Please select at least one shop");
-    }
-  }
-
-  const refreshSubInfo = () => {
-    setLoading(true);
-    userService.getClientsSubs().then(
-        (response) => {
-          setClientsSubs(response.data);
-          setResponseCode(200);
-          setLoading(false);
-        },
-        (error) => {
-          const _content =
-              (error.response &&
-                  error.response.data &&
-                  error.response.data.message) ||
-              error.message ||
-              error.toString();
-
-          setContent(_content);
-          setResponseCode(error.response.status);
-          setLoading(false);
-        }
-    );
-  }
-
-  const handleSelection = (event) => {
-    setSelectedSub(displaySubs[event.target.selectedIndex]);
-    setCurrency(displaySubs[event.target.selectedIndex].currency);
-    setAmount(displaySubs[event.target.selectedIndex].price);
-    setTax(displaySubs[event.target.selectedIndex].tax);
-  }
-
-  const centerStyle = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
-  };
+    const centerStyle = {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+    };
 
   return (
-      <div>
-        <div className="container">
-          <div className="card">
-            <div className="card-header">Clients {loading && (
-                <span className="spinner-border spinner-border-sm"></span>
-            )}</div>
-            <div className="card-body">
-              <div className="d-flex container">
-                <div className="container">
-                  {
-                      content && content instanceof Array && content.length > 0 && content.map((c, index) => (
-                          <ListItemCB key={c.oid} item={c}  handleCheck={handleCheck} />
-                      ))
-                  }
-                </div>
-                <div className="container">
-                  <div className="d-flex justify-content-center">
-                    <button className="btn btn-primary" style={centerStyle} onClick={handleShowPlan}>Show Available Plans</button>
+          <div>
+              {loading && (
+                  <div>
+                      <span className="spinner-border spinner-border-sm"></span>
                   </div>
-                  {
-                    showSubs &&
-                        <div className="container mt-3">
-                          <PaypalCheckout startDate={selectedDate} clientIds={checkedItems} subId={selectedSub.id} amount={amount} tax={tax} currency={currency} callback={() => refreshSubInfo()} />
-                        </div>
-                  }
-
-                </div>
-                {
-                    showSubs && displaySubs && displaySubs.length > 0 &&
-                    <div className="mr-3">
-                      <div className="dropdown">
-                        <select
-                            value={selectedSub.id}
-                            className="form-select"
-                            onChange={handleSelection}
-                        >
-                          {
-                            displaySubs.map((sub, index) => (
-                                  <option value={sub.id} >
-                                    {sub.subscriptionName + "  " + currencyFormatter.format(sub.price) + " plus " + sub.tax + "% tax"}
-                                  </option>
-
-                              ))
-                          }
-                        </select>
+              )}
+              <div className="container">
+                  <div className="card">
+                      <div className="card-header">Order Detail: (All amount includes tax)</div>
+                      <div className="card-body">
+                          <div className="d-flex container">
+                              <div className="container">
+                                  <span>{message1}</span><br/>
+                              </div>
+                              <div className="container">
+                                  <span className="mt-3">{message2}</span>
+                              </div>
+                              <div className="container">
+                                  <div className="d-flex justify-content-center">
+                                      <button className="btn btn-primary" style={centerStyle} onClick={handleContinue}>Continue</button>
+                                  </div>
+                                  <div className="d-flex justify-content-center mt-3">
+                                      <button className="btn btn-secondary" style={centerStyle} onClick={handleBack}>Cancel</button>
+                                  </div>
+                              </div>
+                          </div>
                       </div>
-                      <span className="text-nowrap mr-3">Start Date:</span>
-                      <div>
-                        <DatePicker
-                            selected={selectedDate}
-                            onChange={date => setSelectedDate(date)}
-                            minDate={getMinDate()}
-                            popperPlacement="top-start"
-                            popperModifiers={{
-                              preventOverflow: {
-                                enabled: true,
-                                escapeWithReference: false,
-                                boundariesElement: 'viewport',
-                              },
-                              flip: {
-                                enabled: true,
-                              },
-                              offset: {
-                                enabled: true,
-                                offset: '5px, 10px'
-                              },
-                            }}
-                            style={{zIndex: 9999}}
-                        />
-                      </div>
-
-                    </div>
-                }
+                  </div>
               </div>
 
-            </div>
+              {content &&
+              <form ref={formRef} id="moneris_form" method="POST" action={process.env.REACT_APP_MONERIS_URL}>
+                  <input type="HIDDEN" name="hpp_id" value={process.env.REACT_APP_MONERIS_STORE} />
+                  <input type="hidden" name="hpp_preload" />
+                  <input type="hidden" name="ticket" value={content.ticket} />
+              </form>
+              }
+
+
           </div>
-        </div>
-        {responseCode >= 400 && content && (
-            <div className="form-group pt-50">
-              <div
-                  className="alert alert-danger"
-                  role="alert"
-              >
-                {
-                  (typeof content) === "string" ? content : (content.hasOwnProperty("message") ? content.message : "something wrong")
-                }
-              </div>
-            </div>
-        )}
-
-        <div className="row mt-5">
-          <table className="table">
-            <thead>
-            <tr>
-              <th scope="col">Client</th>
-              <th scope="col">Subscription</th>
-              <th scope="col">Start Date</th>
-              <th scope="col">End Date</th>
-              <th scope="col">Payment ID</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            {clientsSubs && clientsSubs instanceof Array && clientsSubs.length > 0 && clientsSubs.map((cs, index) => (
-                <tr>
-                  <th scope="row">{cs.clientName}</th>
-                  <td>{cs.subscriptionName}</td>
-                  <td>{new Date(cs.startDate).toLocaleDateString()}</td>
-                  <td>{new Date(cs.endDate).toLocaleDateString()}</td>
-                  <td>{cs.paymentId}</td>
-                </tr>
-
-            ))}
-
-            </tbody>
-          </table>
-        </div>
-      </div>
-
   );
 };
 

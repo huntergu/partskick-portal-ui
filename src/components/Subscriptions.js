@@ -163,6 +163,8 @@ const Subscriptions = () => {
           console.log(response.data);
           setResponseCode(200);
           setLoading(false);
+          localStorage.setItem("orderId", response.data);
+          window.open("/checkout", "_blank");
         },
         (error) => {
           const _content =
