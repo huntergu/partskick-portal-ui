@@ -26,6 +26,7 @@ const Checkout = () => {
   };
 
   const storedOrderId = localStorage.getItem("orderId");
+  localStorage.removeItem("orderId");
 
   useEffect(() => {
     if (!storedOrderId) {
@@ -106,7 +107,7 @@ const Checkout = () => {
 
               {content &&
               <form ref={formRef} id="moneris_form" method="POST" action={process.env.REACT_APP_MONERIS_URL}>
-                  <input type="HIDDEN" name="hpp_id" value={process.env.REACT_APP_MONERIS_STORE} />
+                  <input type="hidden" name="hpp_id" value={process.env.REACT_APP_MONERIS_STORE} />
                   <input type="hidden" name="hpp_preload" />
                   <input type="hidden" name="ticket" value={content.ticket} />
               </form>

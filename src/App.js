@@ -24,6 +24,8 @@ import ClientSubscriptions from "./components/ClientSubscriptions";
 import Subscriptions from "./components/Subscriptions";
 import process from 'process/browser';
 import Checkout from "./components/Checkout";
+import PaymentDeclined from "./components/PaymentDeclined";
+import PaymentApproved from "./components/PaymentApproved";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -151,6 +153,8 @@ const App = () => {
             <Route path="/manageSubscription" element={<ClientSubscriptions />} />
             <Route path="/subscriptions" element={<Subscriptions />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/payment/declined" element={<PaymentDeclined />} />
+            <Route path="/payment/approved" element={<PaymentApproved />} />
           </Routes>
         </div>
       </div>

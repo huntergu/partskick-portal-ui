@@ -14,9 +14,15 @@ const fetchOrder = (storedOrderId) => {
         { headers: authHeader() });
 };
 
+const checkOrder = (orderId) => {
+    return axios.get(PAYMENT_API_URL + "checkOrder/" + orderId,
+        { headers: authHeader() });
+};
+
 const monerisService = {
     preLoad,
-    fetchOrder
+    fetchOrder,
+    checkOrder
 };
 
 export default monerisService;
