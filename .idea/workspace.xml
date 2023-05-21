@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="moneris - part5 receipt" />
+    <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="add checkout">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/moneris/PaymentApproved.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/moneris/PaymentApproved.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/moneris.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/moneris.service.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,7 +18,6 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
         <option value="JavaScript File" />
       </list>
     </option>
@@ -21,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="feature/moneris" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -42,10 +46,9 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/moneris&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/dev/partskick-portal-ui/src/services&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/dev/partskick-portal-ui/src/components&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -69,13 +72,9 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\dev\partskick-portal-ui\src\services" />
       <recent name="C:\dev\partskick-portal-ui\src\components" />
       <recent name="C:\dev\partskick-portal-ui" />
       <recent name="C:\dev\partskick-portal-ui\src\paypal" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\dev\partskick-portal-ui\src\components\moneris" />
     </key>
   </component>
   <component name="RunManager">
@@ -84,6 +83,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.localhost:8081" />
         <item itemvalue="JavaScript Debug.localhost:8081" />
       </list>
     </recent_temporary>
@@ -123,16 +123,7 @@
       <workItem from="1682130571481" duration="2354000" />
       <workItem from="1682300825919" duration="7702000" />
       <workItem from="1682802891158" duration="4026000" />
-      <workItem from="1683075196929" duration="3192000" />
-      <workItem from="1683158916692" duration="79000" />
-      <workItem from="1683682675121" duration="6630000" />
-      <workItem from="1683772738695" duration="635000" />
-      <workItem from="1684201428141" duration="4976000" />
-      <workItem from="1684277952084" duration="9490000" />
-      <workItem from="1684460211952" duration="5361000" />
-      <workItem from="1684544601240" duration="4855000" />
-      <workItem from="1684628910606" duration="6154000" />
-      <workItem from="1684693494586" duration="1808000" />
+      <workItem from="1683075196929" duration="1079000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1680323657807</created>
@@ -267,56 +258,7 @@
       <option name="project" value="LOCAL" />
       <updated>1682307916194</updated>
     </task>
-    <task id="LOCAL-00020" summary="logout if token expired">
-      <created>1683076374716</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1683076374716</updated>
-    </task>
-    <task id="LOCAL-00021" summary="moneris - part1">
-      <created>1683691399463</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1683691399463</updated>
-    </task>
-    <task id="LOCAL-00022" summary="moneris - part2">
-      <created>1684211837493</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1684211837493</updated>
-    </task>
-    <task id="LOCAL-00023" summary="moneris - part3 - payment page success">
-      <created>1684295585496</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1684295585496</updated>
-    </task>
-    <task id="LOCAL-00024" summary="moneris - part4 - response from Moneris">
-      <created>1684468599631</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1684468599631</updated>
-    </task>
-    <task id="LOCAL-00025" summary="moneris - part5 receipt">
-      <created>1684646389036</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1684646389036</updated>
-    </task>
-    <task id="LOCAL-00026" summary="moneris - part5 receipt">
-      <created>1684701468443</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1684701468443</updated>
-    </task>
-    <option name="localTasksCounter" value="27" />
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -352,24 +294,7 @@
     <MESSAGE value="multi clients same subscription" />
     <MESSAGE value="env" />
     <MESSAGE value="add checkout" />
-    <MESSAGE value="logout if token expired" />
-    <MESSAGE value="moneris - part1" />
-    <MESSAGE value="moneris - part2" />
-    <MESSAGE value="moneris - part3 - payment page success" />
-    <MESSAGE value="moneris - part4 - response from Moneris" />
-    <MESSAGE value="moneris - part5 receipt" />
-    <option name="LAST_COMMIT_MESSAGE" value="moneris - part5 receipt" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/components/Checkout.js</url>
-          <line>57</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <option name="LAST_COMMIT_MESSAGE" value="add checkout" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
