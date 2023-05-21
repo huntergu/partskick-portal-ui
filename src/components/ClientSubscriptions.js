@@ -4,7 +4,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {useDispatch} from "react-redux";
 import {clearMessage} from "../slices/message";
-import PaypalSubscription from "../paypal/PaypalSubscription";
 
 const ClientSubscriptions = () => {
     const params = new URLSearchParams(window.location.search);
@@ -16,7 +15,6 @@ const ClientSubscriptions = () => {
     const [subs, setSubs] = useState([]);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [clientSubscriptionInfo, setClientSubscriptionInfo] = useState(null);
-    const [paypalPlanId, setPaypalPlanId] = useState(null);
 
     const dispatch = useDispatch();
 
@@ -37,7 +35,6 @@ const ClientSubscriptions = () => {
                 setSubs(response.data);
                 if (response.data && response.data instanceof Array && response.data.length > 0) {
                     setSelectedSub(response.data[0])
-                    setPaypalPlanId(response.data[0].paypalPlanId);
                 }
                 setIsLoading(false);
             },
@@ -100,7 +97,6 @@ const ClientSubscriptions = () => {
 
     const handleSelection = (event) => {
         setSelectedSub(subs[event.target.selectedIndex]);
-        setPaypalPlanId(subs[event.target.selectedIndex].paypalPlanId)
     }
     return (
         <div className="container">
@@ -182,7 +178,7 @@ const ClientSubscriptions = () => {
                         </div>
                         <div className="d-flex container">
                             <div>
-                                <PaypalSubscription sd={selectedDate} pid={paypalPlanId} clientId={clientId} subId={selectedSub.id} callback={() => refreshSubInfo()} />
+                            {/*    subscription*/}
                             </div>
                         </div>
                     </div>

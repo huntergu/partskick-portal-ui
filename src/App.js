@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import React, {useCallback, useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {BrowserRouter as Router, Link, Route, Routes} from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -13,7 +13,7 @@ import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
 
-import { logout } from "./slices/auth";
+import {logout} from "./slices/auth";
 
 import EventBus from "./common/EventBus";
 import ChangePassword from "./components/ChangePassword";
@@ -22,8 +22,10 @@ import ResetPassword from "./components/ResetPassword";
 import RegisterClient from "./components/RegisterClient";
 import ClientSubscriptions from "./components/ClientSubscriptions";
 import Subscriptions from "./components/Subscriptions";
-import process from 'process/browser';
 import Checkout from "./components/Checkout";
+import PaymentDeclined from "./components/moneris/PaymentDeclined";
+import PaymentApproved from "./components/moneris/PaymentApproved";
+import Receipt from "./components/moneris/Receipt";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -151,6 +153,9 @@ const App = () => {
             <Route path="/manageSubscription" element={<ClientSubscriptions />} />
             <Route path="/subscriptions" element={<Subscriptions />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/payment/declined" element={<PaymentDeclined />} />
+            <Route path="/payment/approved" element={<PaymentApproved />} />
+            <Route path="/payment/receipt" element={<Receipt />} />
           </Routes>
         </div>
       </div>
