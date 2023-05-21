@@ -4,15 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="moneris - part3 - payment page success">
-      <change afterPath="$PROJECT_DIR$/src/components/PaymentApproved.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/PaymentDeclined.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.development" beforeDir="false" afterPath="$PROJECT_DIR$/.env.development" afterDir="false" />
+    <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="moneris - part4 - response from Moneris">
+      <change afterPath="$PROJECT_DIR$/src/components/moneris/PaymentApproved.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/moneris/Receipt.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/auth-form-field.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Checkout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Checkout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/paypal/PaypalCheckout.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/paypal/PaypalSubscription.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ClientSubscriptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ClientSubscriptions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PaymentApproved.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PaymentDeclined.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/moneris/PaymentDeclined.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/moneris.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/moneris.service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -23,6 +25,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="CSS File" />
         <option value="JavaScript File" />
       </list>
     </option>
@@ -53,7 +56,8 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "feature/moneris",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/dev/partskick-portal-ui/src/components",
+    "last_opened_file_path": "C:/dev/partskick-portal-ui/src/services",
+    "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -77,10 +81,13 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\dev\partskick-portal-ui\src\components" />
       <recent name="C:\dev\partskick-portal-ui\src\services" />
+      <recent name="C:\dev\partskick-portal-ui\src\components" />
       <recent name="C:\dev\partskick-portal-ui" />
       <recent name="C:\dev\partskick-portal-ui\src\paypal" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\dev\partskick-portal-ui\src\components\moneris" />
     </key>
   </component>
   <component name="RunManager">
@@ -134,7 +141,9 @@
       <workItem from="1683772738695" duration="635000" />
       <workItem from="1684201428141" duration="4976000" />
       <workItem from="1684277952084" duration="9490000" />
-      <workItem from="1684460211952" duration="5322000" />
+      <workItem from="1684460211952" duration="5361000" />
+      <workItem from="1684544601240" duration="4855000" />
+      <workItem from="1684628910606" duration="6116000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1680323657807</created>
@@ -297,7 +306,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684295585496</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="moneris - part4 - response from Moneris">
+      <created>1684468599631</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1684468599631</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -337,14 +353,15 @@
     <MESSAGE value="moneris - part1" />
     <MESSAGE value="moneris - part2" />
     <MESSAGE value="moneris - part3 - payment page success" />
-    <option name="LAST_COMMIT_MESSAGE" value="moneris - part3 - payment page success" />
+    <MESSAGE value="moneris - part4 - response from Moneris" />
+    <option name="LAST_COMMIT_MESSAGE" value="moneris - part4 - response from Moneris" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/Checkout.js</url>
-          <line>60</line>
+          <line>57</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>

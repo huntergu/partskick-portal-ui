@@ -1,8 +1,5 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import monerisService from "../services/moneris.service";
-import ListItemCB from "./ListItemCB";
-import DatePicker from "react-datepicker";
-import {ErrorMessage, Field, Form} from "formik";
 
 const Checkout = () => {
   const [loading, setLoading] = useState(false);

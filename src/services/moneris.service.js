@@ -18,11 +18,10 @@ const checkOrder = (orderId) => {
     return axios.get(PAYMENT_API_URL + "checkOrder/" + orderId,
         { headers: authHeader() });
 };
-
 const monerisService = {
     preLoad,
     fetchOrder,
-    checkOrder
+    checkOrder,
 };
 
 export default monerisService;
