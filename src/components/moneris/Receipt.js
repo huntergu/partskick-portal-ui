@@ -30,8 +30,6 @@ const Receipt = () => {
                     <input type="hidden" name="order" value={orderId} />
                 </form>
             }
-
-
         </div>
     )
 }
