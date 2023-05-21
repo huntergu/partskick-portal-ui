@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="moneris - part5 receipt">
-      <change beforePath="$PROJECT_DIR$/.env.production" beforeDir="false" afterPath="$PROJECT_DIR$/.env.production" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/moneris/Receipt.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/moneris/Receipt.js" afterDir="false" />
-    </list>
+    <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="moneris - part5 receipt" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -136,7 +132,7 @@
       <workItem from="1684460211952" duration="5361000" />
       <workItem from="1684544601240" duration="4855000" />
       <workItem from="1684628910606" duration="6154000" />
-      <workItem from="1684693494586" duration="1784000" />
+      <workItem from="1684693494586" duration="1808000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1680323657807</created>
@@ -313,7 +309,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684646389036</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="moneris - part5 receipt">
+      <created>1684701468443</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1684701468443</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
