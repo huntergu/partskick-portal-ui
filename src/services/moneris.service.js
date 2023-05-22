@@ -20,11 +20,12 @@ const checkOrder = (orderId) => {
 };
 
 const validateOrder = (txKey) => {
-    const data = new FormData();
-    data.append("ps_store_id", process.env.REACT_APP_MONERIS_STORE);
-    data.append("hpp_key", process.env.REACT_APP_MONERIS_HPPKEY);
-    data.append("transactionKey", txKey);
-    return axios.post(VALIDATE_API_URL, data, { headers: authHeader() });
+    let data = "ps_store_id=" + encodeURIComponent(process.env.REACT_APP_MONERIS_STORE) +
+        "&hpp_key=" + encodeURIComponent(process.env.REACT_APP_MONERIS_HPPKEY) +
+        "&transactionKey=" + encodeURIComponent(txKey);
+    return axios.post(VALIDATE_API_URL, data, { headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        } });
 }
 
 const monerisService = {
