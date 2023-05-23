@@ -26,6 +26,7 @@ import Checkout from "./components/Checkout";
 import PaymentDeclined from "./components/moneris/PaymentDeclined";
 import PaymentApproved from "./components/moneris/PaymentApproved";
 import Receipt from "./components/moneris/Receipt";
+import PaymentValidation from "./components/moneris/PaymentValidation";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -150,6 +151,7 @@ const App = () => {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/payment/declined" element={<PaymentDeclined />} />
             <Route path="/payment/approved" element={<PaymentApproved />} />
+            <Route path="/payment/validation" element={<PaymentValidation />} />
             <Route path="/payment/receipt" element={<Receipt />} />
           </Routes>
         </div>
