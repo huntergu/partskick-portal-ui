@@ -158,7 +158,7 @@ const Subscriptions = () => {
     setLoading(true);
     let subId = sub.id;
 
-    monerisService.preLoad(clientIds, subId, startDate.toLocaleDateString()).then(
+    monerisService.preLoad(clientIds, subId, startDate.toLocaleDateString("en-US")).then(
         (response) => {
           console.log(response.data);
           setResponseCode(200);
