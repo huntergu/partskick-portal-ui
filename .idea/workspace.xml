@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="moneris - part9 fix date format">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Subscriptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Subscriptions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/moneris.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/moneris.service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +126,10 @@
       <workItem from="1683075196929" duration="1079000" />
       <workItem from="1684784478728" duration="9409000" />
       <workItem from="1684810761575" duration="44000" />
-      <workItem from="1684893063808" duration="876000" />
+      <workItem from="1684893063808" duration="2173000" />
+      <workItem from="1684981609671" duration="1197000" />
+      <workItem from="1684987300631" duration="174000" />
+      <workItem from="1685065927907" duration="1827000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1680323657807</created>
@@ -301,7 +306,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684893322404</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="moneris - part9 fix date format">
+      <created>1684894647565</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1684894647565</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

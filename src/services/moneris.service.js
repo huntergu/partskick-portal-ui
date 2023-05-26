@@ -3,9 +3,9 @@ import authHeader from "./auth-header";
 
 const PAYMENT_API_URL = process.env.REACT_APP_API_URL + "/moneris/";
 const VALIDATE_API_URL = process.env.REACT_APP_MONERIS_URL_VERIFY;
-const preLoad = (clientIds, subId, startDate) => {
+const preLoad = (clientIds, subId, startDate, timeZone) => {
     return axios.post(PAYMENT_API_URL + "preload",
-        {clientIds, subId, startDate},
+        {clientIds, subId, startDate, timeZone},
         { headers: authHeader() });
 };
 

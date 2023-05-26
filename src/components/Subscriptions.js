@@ -28,7 +28,13 @@ const Subscriptions = () => {
   const [displaySubs, setDisplaySubs] = useState([]);
   const [showSubs, setShowSubs] = useState(false);
   const [selectedDate, setSelectedDate] = useState(getMinDate());
+  const [timeZone, setTimeZone] = useState('');
 
+  useEffect(() => {
+    // Retrieve the client's timezone
+    const clientTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    setTimeZone(clientTimezone);
+  }, []);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -158,7 +164,7 @@ const Subscriptions = () => {
     setLoading(true);
     let subId = sub.id;
 
-    monerisService.preLoad(clientIds, subId, startDate).then(
+    monerisService.preLoad(clientIds, subId, startDate, timeZone).then(
         (response) => {
           console.log(response.data);
           setResponseCode(200);
