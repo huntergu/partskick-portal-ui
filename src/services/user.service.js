@@ -1,7 +1,7 @@
 import axios from "../common/AuthInterceptor";
 import authHeader from "./auth-header";
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {clearMessage, setMessage} from "../slices/message";
+import {setMessage} from "../slices/message";
 
 const USER_API_URL = process.env.REACT_APP_API_URL + "/user/";
 const getWorkstationList = (clientId) => {

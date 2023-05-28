@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 
 import UserService from "../services/user.service";
 import EventBus from "../common/EventBus";
+import {Link} from "react-router-dom";
 
 const BoardAdmin = () => {
   const [content, setContent] = useState("");
 
-  useEffect(() => {
+/*  useEffect(() => {
     UserService.getAdminBoard().then(
       (response) => {
         setContent(response.data);
@@ -26,13 +27,19 @@ const BoardAdmin = () => {
         }
       }
     );
-  }, []);
+  }, []);*/
 
   return (
     <div className="container">
+{/*
       <header className="jumbotron">
         <h3>{content}</h3>
       </header>
+*/}
+      <Link to="/createUser">
+        <button className="btn-primary">Create New User</button>
+      </Link>
+
     </div>
   );
 };

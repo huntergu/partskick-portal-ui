@@ -27,6 +27,7 @@ import PaymentDeclined from "./components/moneris/PaymentDeclined";
 import PaymentApproved from "./components/moneris/PaymentApproved";
 import Receipt from "./components/moneris/Receipt";
 import PaymentValidation from "./components/moneris/PaymentValidation";
+import CreateUser from "./components/CreateUser";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -71,6 +72,14 @@ const App = () => {
               </Link>
             </li>
 
+            {showAdminBoard && (
+                <li className="nav-item">
+                  <Link to={"/admin"} className="nav-link">
+                    Admin Board
+                  </Link>
+                </li>
+            )}
+
             <li className="nav-item">
               <Link to={"/subscriptions"} className="nav-link">
                 Subscriptions
@@ -85,14 +94,7 @@ const App = () => {
               </li>
             )}
 
-            {showAdminBoard && (
-              <li className="nav-item">
-                <Link to={"/admin"} className="nav-link">
-                  Admin Board
-                </Link>
-              </li>
-            )}
-
+{/*
             {currentUser && (
               <li className="nav-item">
                 <Link to={"/user"} className="nav-link">
@@ -100,6 +102,7 @@ const App = () => {
                 </Link>
               </li>
             )}
+*/}
           </div>
 
           {currentUser ? (
@@ -153,6 +156,7 @@ const App = () => {
             <Route path="/payment/approved" element={<PaymentApproved />} />
             <Route path="/payment/validation" element={<PaymentValidation />} />
             <Route path="/payment/receipt" element={<Receipt />} />
+            <Route path="/createUser" element={<CreateUser />} />
           </Routes>
         </div>
       </div>

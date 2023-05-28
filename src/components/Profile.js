@@ -32,7 +32,7 @@ const Profile = () => {
           currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
       </ul>
         {
-            currentUser.roles && currentUser.roles.find(r => r === 'CHANGE_PASSWORD_PRIVILEGE') &&
+            currentUser.roles && currentUser.roles.find(r => r === "CHANGE_PASSWORD_PRIVILEGE") &&
             <div>
                 <a href={"/changePassword"}>
                     <span>Change Password</span></a>
