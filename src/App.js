@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {BrowserRouter as Router, Link, Route, Routes} from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./App.css";
 
 import Login from "./components/Login";
@@ -28,6 +29,7 @@ import PaymentApproved from "./components/moneris/PaymentApproved";
 import Receipt from "./components/moneris/Receipt";
 import PaymentValidation from "./components/moneris/PaymentValidation";
 import CreateUser from "./components/CreateUser";
+import ClientDiscount from "./components/ClientDiscount";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -73,11 +75,28 @@ const App = () => {
             </li>
 
             {showAdminBoard && (
-                <li className="nav-item">
-                  <Link to={"/admin"} className="nav-link">
-                    Admin Board
-                  </Link>
+                <li className="nav-item dropdown">
+                  <a
+                      className="nav-link dropdown-toggle"
+                      href="#"
+                      id="navbarDropdown"
+                      role="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                  >
+                    Admin
+                  </a>
+                  <div className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                    <Link to={"/createUser"} className="dropdown-item">
+                      Create User
+                    </Link>
+                    <Link to={"/clientDiscount"} className="dropdown-item">
+                      Set Client Discount
+                    </Link>
+                  </div>
                 </li>
+
             )}
 
             <li className="nav-item">
@@ -94,15 +113,6 @@ const App = () => {
               </li>
             )}
 
-{/*
-            {currentUser && (
-              <li className="nav-item">
-                <Link to={"/user"} className="nav-link">
-                  User
-                </Link>
-              </li>
-            )}
-*/}
           </div>
 
           {currentUser ? (
@@ -157,6 +167,7 @@ const App = () => {
             <Route path="/payment/validation" element={<PaymentValidation />} />
             <Route path="/payment/receipt" element={<Receipt />} />
             <Route path="/createUser" element={<CreateUser />} />
+            <Route path="/clientDiscount" element={<ClientDiscount />} />
           </Routes>
         </div>
       </div>

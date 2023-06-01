@@ -39,6 +39,9 @@ const BoardAdmin = () => {
       <Link to="/createUser">
         <button className="btn-primary">Create New User</button>
       </Link>
+      <Link to="/clientDiscount">
+        <button className="btn-primary">Set Discount</button>
+      </Link>
 
     </div>
   );

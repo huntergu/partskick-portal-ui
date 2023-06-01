@@ -26,8 +26,17 @@ export const createUser = createAsyncThunk(
     }
 );
 
+export const getClients = () => axios.get(ADMIN_API_URL + "getClients", { headers: authHeader() });
+
+export const getDiscountSub = () => axios.get(ADMIN_API_URL + "getDiscountSub", { headers: authHeader() });
+
+export const updateDiscount = (clientId, subId, discount) => axios.post(ADMIN_API_URL + "setDiscount", {clientId, subId, discount}, {headers: authHeader()});
+
 const adminService = {
-    createUser
+    createUser,
+    getClients,
+    getDiscountSub,
+    updateDiscount
 }
 
 export default adminService;

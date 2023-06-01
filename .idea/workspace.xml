@@ -4,14 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="moneris - part10 specify timezone">
-      <change afterPath="$PROJECT_DIR$/src/components/CreateUser.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/admin.service.js" afterDir="false" />
+    <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="create user">
+      <change afterPath="$PROJECT_DIR$/src/components/ClientDiscount.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ClientDiscountItem.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/BoardAdmin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BoardAdmin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/user.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/user.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/admin.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/admin.service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +51,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/dev/partskick-portal-ui/src/components/moneris&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/dev/partskick-portal-ui/src/components&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -75,8 +75,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\dev\partskick-portal-ui\src\components\moneris" />
       <recent name="C:\dev\partskick-portal-ui\src\components" />
+      <recent name="C:\dev\partskick-portal-ui\src\components\moneris" />
       <recent name="C:\dev\partskick-portal-ui" />
       <recent name="C:\dev\partskick-portal-ui\src\paypal" />
     </key>
@@ -134,7 +134,11 @@
       <workItem from="1684981609671" duration="1197000" />
       <workItem from="1684987300631" duration="174000" />
       <workItem from="1685065927907" duration="3160000" />
-      <workItem from="1685297387495" duration="2603000" />
+      <workItem from="1685297387495" duration="3521000" />
+      <workItem from="1685328915830" duration="621000" />
+      <workItem from="1685412256157" duration="7346000" />
+      <workItem from="1685502271593" duration="3531000" />
+      <workItem from="1685583299076" duration="6389000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1680323657807</created>
@@ -325,7 +329,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685069003022</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="create user">
+      <created>1685302214030</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1685302214030</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -367,7 +378,8 @@
     <MESSAGE value="moneris - part9" />
     <MESSAGE value="moneris - part9 fix date format" />
     <MESSAGE value="moneris - part10 specify timezone" />
-    <option name="LAST_COMMIT_MESSAGE" value="moneris - part10 specify timezone" />
+    <MESSAGE value="create user" />
+    <option name="LAST_COMMIT_MESSAGE" value="create user" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
