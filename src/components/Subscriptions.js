@@ -476,8 +476,8 @@ const Subscriptions = () => {
                 <tr>
                   <th scope="row">{cs.clientName}</th>
                   <td>{cs.subscriptionName}</td>
-                  <td>{new Date(cs.startDate).toLocaleDateString()}</td>
-                  <td>{new Date(cs.endDate).toLocaleDateString()}</td>
+                  <td>{cs.startDate}</td>
+                  <td>{cs.endDate}</td>
                   <td>{cs.paymentId}</td>
                 </tr>
 

@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="add log for error">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Subscriptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Subscriptions.js" afterDir="false" />
-    </list>
+    <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="refresh sub" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -135,7 +132,7 @@
       <workItem from="1685502271593" duration="3531000" />
       <workItem from="1685583299076" duration="6412000" />
       <workItem from="1685667200320" duration="11465000" />
-      <workItem from="1685729375197" duration="4792000" />
+      <workItem from="1685729375197" duration="5478000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1680323657807</created>
@@ -354,7 +351,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685733824237</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="refresh sub">
+      <created>1685735825140</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1685735825140</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -399,7 +403,8 @@
     <MESSAGE value="create user" />
     <MESSAGE value="set discount" />
     <MESSAGE value="add log for error" />
-    <option name="LAST_COMMIT_MESSAGE" value="add log for error" />
+    <MESSAGE value="refresh sub" />
+    <option name="LAST_COMMIT_MESSAGE" value="refresh sub" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
