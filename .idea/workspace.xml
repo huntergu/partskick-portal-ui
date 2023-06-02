@@ -4,21 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="set discount">
+    <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="add log for error">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BoardAdmin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BoardAdmin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BoardModerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BoardModerator.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BoardUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BoardUser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ClientDiscount.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ClientDiscount.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ClientDiscountItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ClientDiscountItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ClientSubscriptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ClientSubscriptions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegisterClient.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegisterClient.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Subscriptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Subscriptions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/moneris/PaymentValidation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/moneris/PaymentValidation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/admin.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/admin.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/user.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/user.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/slices/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/slices/auth.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +135,7 @@
       <workItem from="1685502271593" duration="3531000" />
       <workItem from="1685583299076" duration="6412000" />
       <workItem from="1685667200320" duration="11465000" />
-      <workItem from="1685729375197" duration="3588000" />
+      <workItem from="1685729375197" duration="4792000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1680323657807</created>
@@ -359,7 +347,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685682069746</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="add log for error">
+      <created>1685733824237</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1685733824237</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -403,27 +398,16 @@
     <MESSAGE value="moneris - part10 specify timezone" />
     <MESSAGE value="create user" />
     <MESSAGE value="set discount" />
-    <option name="LAST_COMMIT_MESSAGE" value="set discount" />
+    <MESSAGE value="add log for error" />
+    <option name="LAST_COMMIT_MESSAGE" value="add log for error" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/Subscriptions.js</url>
-          <line>246</line>
+          <line>243</line>
           <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/components/ClientDiscountItem.js</url>
-          <line>43</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/components/ClientDiscountItem.js</url>
-          <line>37</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

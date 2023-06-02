@@ -99,10 +99,9 @@ const Subscriptions = () => {
     );
   }, []);
 
-/*  useEffect(() => {
-    if (!currentUser) return;
+  useEffect(() => {
     refreshSubInfo();
-  }, [content, currentUser]);*/
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -164,7 +163,6 @@ const Subscriptions = () => {
     }
   }
 
-/*
   const refreshSubInfo = () => {
     setLoading(true);
     userService.getClientsSubs().then(
@@ -187,7 +185,6 @@ const Subscriptions = () => {
         }
     );
   }
-*/
 
   const handleSelection = (event) => {
     setSelectedSub(displaySubs[event.target.selectedIndex]);
@@ -466,6 +463,11 @@ const Subscriptions = () => {
               <th scope="col">Start Date</th>
               <th scope="col">End Date</th>
               <th scope="col">Payment ID</th>
+              <th scope="col">
+                <div className="container mt-3">
+                  <button className="btn-primary" onClick={() => refreshSubInfo()}>Refresh</button>
+                </div>
+              </th>
             </tr>
             </thead>
             <tbody>
