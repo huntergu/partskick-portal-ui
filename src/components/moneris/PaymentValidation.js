@@ -37,6 +37,7 @@ const PaymentValidation = () => {
                         error.response.data) ||
                     error.message ||
                     error.toString();
+                console.log(error);
 
                 setMessage(_content)
                 setLoading(false);

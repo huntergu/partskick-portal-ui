@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="set discount">
-      <change afterPath="$PROJECT_DIR$/src/components/ListItemCBDiscount.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/BoardAdmin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BoardAdmin.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/BoardModerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BoardModerator.js" afterDir="false" />
@@ -17,7 +16,7 @@
       <change beforePath="$PROJECT_DIR$/src/components/RegisterClient.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegisterClient.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Subscriptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Subscriptions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/moneris/PaymentValidation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/moneris/PaymentValidation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/moneris.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/moneris.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/admin.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/admin.service.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/user.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/user.service.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/slices/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/slices/auth.js" afterDir="false" />
     </list>
@@ -147,7 +146,8 @@
       <workItem from="1685412256157" duration="7346000" />
       <workItem from="1685502271593" duration="3531000" />
       <workItem from="1685583299076" duration="6412000" />
-      <workItem from="1685667200320" duration="11211000" />
+      <workItem from="1685667200320" duration="11465000" />
+      <workItem from="1685729375197" duration="3588000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1680323657807</created>
@@ -352,7 +352,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685593023187</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="set discount">
+      <created>1685682069746</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1685682069746</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -403,9 +410,20 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/Subscriptions.js</url>
-          <line>242</line>
-          <properties lambdaOrdinal="-1" />
+          <line>246</line>
           <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/components/ClientDiscountItem.js</url>
+          <line>43</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/components/ClientDiscountItem.js</url>
+          <line>37</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

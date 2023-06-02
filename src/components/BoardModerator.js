@@ -17,6 +17,7 @@ const BoardModerator = () => {
             error.response.data) ||
           error.message ||
           error.toString();
+        console.log(error);
 
         setContent(_content);
 

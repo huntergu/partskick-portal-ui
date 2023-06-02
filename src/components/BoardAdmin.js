@@ -18,7 +18,7 @@ const BoardAdmin = () => {
             error.response.data) ||
           error.message ||
           error.toString();
-
+        console.log(error);
         setContent(_content);
 
         if (error.response && error.response.status === 401) {

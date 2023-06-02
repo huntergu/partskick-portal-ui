@@ -29,6 +29,7 @@ const Home = () => {
                 error.response.data) ||
             error.message ||
             error.toString();
+        console.log(error);
 
         setContent(_content);
         setResponseCode(error.response.status);
@@ -53,6 +54,7 @@ const Home = () => {
             error.message ||
             error.toString();
 
+        console.log(error);
         setContent(_content);
         setResponseCode(error.response.status);
         setLoading(false);

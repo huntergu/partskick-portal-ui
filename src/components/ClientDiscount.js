@@ -37,6 +37,7 @@ const ClientDiscount = () => {
                       error.response.data) ||
                   error.message ||
                   error.toString();
+              console.log(error);
 
               setMessage(_content);
               setLoading(false);
@@ -59,6 +60,7 @@ const ClientDiscount = () => {
                       error.response.data) ||
                   error.message ||
                   error.toString();
+              console.log(error);
 
               setMessage(_content);
               setLoading(false);

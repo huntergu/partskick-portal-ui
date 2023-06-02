@@ -18,6 +18,7 @@ export const register = createAsyncThunk(
           error.response.data ) ||
         error.message ||
         error.toString();
+        console.log(error);
       thunkAPI.dispatch(setMessage(message));
       return thunkAPI.rejectWithValue();
     }
@@ -37,7 +38,8 @@ export const changePassword = createAsyncThunk(
           error.response.data) ||
         error.message ||
         error.toString();
-      thunkAPI.dispatch(setMessage(message));
+        console.log(error);
+        thunkAPI.dispatch(setMessage(message));
       return thunkAPI.rejectWithValue();
     }
   }
@@ -55,7 +57,8 @@ export const resetPassword = createAsyncThunk(
           error.response.data) ||
         error.message ||
         error.toString();
-      thunkAPI.dispatch(setMessage(message));
+        console.log(error);
+        thunkAPI.dispatch(setMessage(message));
       return thunkAPI.rejectWithValue();
     }
   }
@@ -73,7 +76,8 @@ export const forgetPassword = createAsyncThunk(
           error.response.data) ||
         error.message ||
         error.toString();
-      thunkAPI.dispatch(setMessage(message));
+        console.log(error);
+        thunkAPI.dispatch(setMessage(message));
       return thunkAPI.rejectWithValue();
     }
   }
@@ -91,6 +95,7 @@ export const login = createAsyncThunk(
           error.response.data) ||
         error.message ||
         error.toString();
+        console.log(error);
       thunkAPI.dispatch(setMessage(message));
       return thunkAPI.rejectWithValue();
     }

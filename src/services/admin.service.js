@@ -20,6 +20,7 @@ export const createUser = createAsyncThunk(
                     error.response.data) ||
                 error.message ||
                 error.toString();
+            console.log(error);
             thunkAPI.dispatch(setMessage(message));
             return thunkAPI.rejectWithValue();
         }

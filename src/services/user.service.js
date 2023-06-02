@@ -56,6 +56,7 @@ const registerClient = createAsyncThunk(
                 error.response.data) ||
             error.message ||
             error.toString();
+        console.log(error);
         thunkAPI.dispatch(setMessage(message));
         return thunkAPI.rejectWithValue();
       }
@@ -77,7 +78,7 @@ const createClientSubscription = createAsyncThunk(
                 error.response.data) ||
             error.message ||
             error.toString();
-        console.log(message);
+        console.log(error);
         thunkAPI.dispatch(setMessage(message));
         return thunkAPI.rejectWithValue();
       }

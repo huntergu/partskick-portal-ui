@@ -37,10 +37,14 @@ const ClientDiscountItem = ( {item, subs} ) => {
                 (error) => {
                     const _content =
                         (error.response &&
-                            error.response.data) ||
+                            error.response.data && error.response.data.message) ||
                         error.message ||
                         error.toString();
+                    console.log(error);
                     alert(_content);
+                    setSelectedSub(item.sub);
+                    setEditedValue(item.discount);
+                    setIsEdited(false);
                     setLoading(false);
                 }
             );

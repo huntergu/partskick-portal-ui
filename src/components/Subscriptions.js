@@ -90,6 +90,7 @@ const Subscriptions = () => {
                 error.response.data) ||
             error.message ||
             error.toString();
+        console.log(error);
 
         setContent(_content);
         setResponseCode(error.response.status);
@@ -116,6 +117,7 @@ const Subscriptions = () => {
                   error.response.data) ||
               error.message ||
               error.toString();
+          console.log(error);
           setMessage(_content);
           setLoading(false);
         }
@@ -177,6 +179,7 @@ const Subscriptions = () => {
                   error.response.data) ||
               error.message ||
               error.toString();
+        console.log(error);
 
           setContent(_content);
           setResponseCode(error.response.status);
@@ -214,6 +217,7 @@ const Subscriptions = () => {
                   error.response.data) ||
               error.message ||
               error.toString();
+          console.log(error);
 
           setContent(_content);
           setResponseCode(error.response.status);
@@ -244,6 +248,7 @@ const Subscriptions = () => {
                   error.response.data) ||
               error.message ||
               error.toString();
+          console.log(error);
 
           setContent(_content);
           setResponseCode(error.response.status);
