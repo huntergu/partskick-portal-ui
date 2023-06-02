@@ -15,8 +15,7 @@ export const register = createAsyncThunk(
     } catch (error) {
       const message =
         (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
+          error.response.data ) ||
         error.message ||
         error.toString();
       thunkAPI.dispatch(setMessage(message));
@@ -35,8 +34,7 @@ export const changePassword = createAsyncThunk(
     } catch (error) {
       const message =
         (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
+          error.response.data) ||
         error.message ||
         error.toString();
       thunkAPI.dispatch(setMessage(message));
@@ -54,8 +52,7 @@ export const resetPassword = createAsyncThunk(
     } catch (error) {
       const message =
         (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
+          error.response.data) ||
         error.message ||
         error.toString();
       thunkAPI.dispatch(setMessage(message));
@@ -73,8 +70,7 @@ export const forgetPassword = createAsyncThunk(
     } catch (error) {
       const message =
         (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
+          error.response.data) ||
         error.message ||
         error.toString();
       thunkAPI.dispatch(setMessage(message));
@@ -92,8 +88,7 @@ export const login = createAsyncThunk(
     } catch (error) {
       const message =
         (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
+          error.response.data) ||
         error.message ||
         error.toString();
       thunkAPI.dispatch(setMessage(message));

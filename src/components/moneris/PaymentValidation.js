@@ -34,8 +34,7 @@ const PaymentValidation = () => {
             (error) => {
                 const _content =
                     (error.response &&
-                        error.response.data &&
-                        error.response.data.message) ||
+                        error.response.data) ||
                     error.message ||
                     error.toString();
 

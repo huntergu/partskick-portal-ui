@@ -4,14 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="create user">
-      <change afterPath="$PROJECT_DIR$/src/components/ClientDiscount.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ClientDiscountItem.js" afterDir="false" />
+    <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="set discount">
+      <change afterPath="$PROJECT_DIR$/src/components/ListItemCBDiscount.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/BoardAdmin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BoardAdmin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/admin.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/admin.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/BoardModerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BoardModerator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/BoardUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BoardUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ClientDiscount.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ClientDiscount.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ClientDiscountItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ClientDiscountItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ClientSubscriptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ClientSubscriptions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegisterClient.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegisterClient.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Subscriptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Subscriptions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/moneris/PaymentValidation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/moneris/PaymentValidation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/moneris.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/moneris.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/user.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/user.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/slices/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/slices/auth.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +146,8 @@
       <workItem from="1685328915830" duration="621000" />
       <workItem from="1685412256157" duration="7346000" />
       <workItem from="1685502271593" duration="3531000" />
-      <workItem from="1685583299076" duration="6389000" />
+      <workItem from="1685583299076" duration="6412000" />
+      <workItem from="1685667200320" duration="11211000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1680323657807</created>
@@ -336,7 +345,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685302214030</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="set discount">
+      <created>1685593023186</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1685593023187</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -379,7 +395,20 @@
     <MESSAGE value="moneris - part9 fix date format" />
     <MESSAGE value="moneris - part10 specify timezone" />
     <MESSAGE value="create user" />
-    <option name="LAST_COMMIT_MESSAGE" value="create user" />
+    <MESSAGE value="set discount" />
+    <option name="LAST_COMMIT_MESSAGE" value="set discount" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/components/Subscriptions.js</url>
+          <line>242</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -53,8 +53,7 @@ const registerClient = createAsyncThunk(
       } catch (error) {
         const message =
             (error.response &&
-                error.response.data &&
-                error.response.data.message) ||
+                error.response.data) ||
             error.message ||
             error.toString();
         thunkAPI.dispatch(setMessage(message));
@@ -75,8 +74,7 @@ const createClientSubscription = createAsyncThunk(
       } catch (error) {
         const message =
             (error.response &&
-                error.response.data &&
-                error.response.data.message) ||
+                error.response.data) ||
             error.message ||
             error.toString();
         console.log(message);
