@@ -91,6 +91,10 @@ const preLoadSubscription = (clientIds, subId, startDate) => {
         { headers: authHeader() });
 };
 
+const getTaxInfo = () => {
+  return axios.get(USER_API_URL + "taxInfo", { headers: authHeader() });
+};
+
 const userService = {
   getPublicContent,
   getUserBoard,
@@ -105,7 +109,8 @@ const userService = {
   createClientSubscription,
   getClientSubscriptionInfo,
   getClientsSubs,
-  preLoadSubscription
+  preLoadSubscription,
+  getTaxInfo
 };
 
 export default userService

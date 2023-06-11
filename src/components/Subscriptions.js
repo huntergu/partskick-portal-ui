@@ -36,6 +36,7 @@ const Subscriptions = () => {
   const [displayClientWithDiscount, setDisplayClientWithDiscount] = useState([]);
   const [selectedDiscountSub, setSelectedDiscountSub] = useState(0);
   const [checkedDiscountClient, setCheckedDiscountClient] = useState([]);
+  const [taxInfo, setTaxInfo] = useState(undefined);
 
   useEffect(() => {
     // Retrieve the client's timezone
@@ -100,6 +101,31 @@ const Subscriptions = () => {
   }, []);
 
   useEffect(() => {
+    setLoading(true);
+    userService.getTaxInfo().then(
+        (response) => {
+          if (response.data) {
+            setTaxInfo(response.data);
+          }
+          setLoading(false);
+          setResponseCode(200);
+        },
+        (error) => {
+          const _content =
+              (error.response &&
+                  error.response.data) ||
+              error.message ||
+              error.toString();
+          console.log(error);
+
+          setContent(_content);
+          setResponseCode(error.response.status);
+          setLoading(false);
+        }
+    );
+  }, []);
+
+  useEffect(() => {
     refreshSubInfo();
   }, []);
 
@@ -132,24 +158,41 @@ const Subscriptions = () => {
     return <Navigate to="/login" />;
   }
 
-  const handleCheck = (itemId, isChecked) => {
+  const handleCheck = (item, isChecked) => {
     if (isChecked) {
-      setCheckedItems([...checkedItems, itemId]);
+      setCheckedItems([...checkedItems, item]);
     } else {
-      setCheckedItems(checkedItems.filter((id) => id !== itemId));
+      const updatedItems = checkedItems.filter((c) => c.oid !== item.oid);
+      setCheckedItems(updatedItems);
     }
   };
 
-    const handleDiscountClientCheck = (itemId, isChecked) => {
+    const handleDiscountClientCheck = (item, isChecked) => {
     if (isChecked) {
-      setCheckedDiscountClient([...checkedDiscountClient, itemId]);
+      setCheckedDiscountClient([...checkedDiscountClient, item]);
     } else {
-      setCheckedDiscountClient(checkedDiscountClient.filter((id) => id !== itemId));
+      setCheckedDiscountClient(checkedDiscountClient.filter((c) => c.oid !== item.oid));
     }
   };
+
+  const differentProv = (c) => {
+    let ps = undefined;
+    for (const xc of c) {
+      if (!ps) {
+        ps = xc.province;
+      } else if (ps !== xc.province) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   const handleShowPlan = () => {
     if (checkedItems.length > 0) {
+      if (differentProv(checkedItems)) {
+        alert("Cannot combine clients in different province/state into one payment.")
+        return;
+      }
       let dis = subs.filter(s => s.multiShop === checkedItems.length);
       if (dis.length > 0) {
         setDisplaySubs(dis);
@@ -196,11 +239,11 @@ const Subscriptions = () => {
     alignItems: "center"
   };
 
-  const handleSubscribe = (clientIds, sub, startDate) => {
+  const handleSubscribe = (clients, sub, startDate) => {
     setLoading(true);
     let subId = sub.id;
 
-    monerisService.preLoad(clientIds, subId, startDate, timeZone, false).then(
+    monerisService.preLoad(clients.map(c => c.oid), subId, startDate, timeZone, false).then(
         (response) => {
           // console.log(response.data);
           setResponseCode(200);
@@ -224,14 +267,20 @@ const Subscriptions = () => {
 
   }
 
-  const handleDiscountSubscribe = (clientIds, startDate) => {
-    if (!clientIds || clientIds.length === 0) {
+  const handleDiscountSubscribe = (clients, startDate) => {
+    if (!clients || clients.length === 0) {
       alert("Please select at least one client");
       return;
     }
+    if (differentProv(clients)) {
+      alert("Cannot combine clients in different province/state into one payment.")
+      return;
+    }
+
     setLoading(true);
 
-    monerisService.preLoad(clientIds, selectedDiscountSub, startDate, timeZone, true).then(
+
+    monerisService.preLoad(clients.map(client => client.oid), selectedDiscountSub, startDate, timeZone, true).then(
         (response) => {
           // console.log(response.data);
           setResponseCode(200);
@@ -313,7 +362,7 @@ const Subscriptions = () => {
                                   {
                                     displaySubs.map((sub, index) => (
                                         <option value={sub.id} >
-                                          {sub.subscriptionName + "  " + currencyFormatter.format(sub.price) + " plus " + sub.tax + "% tax"}
+                                          {sub.subscriptionName + "  " + currencyFormatter.format(sub.price) + " plus " + (checkedItems.length > 0 ? taxInfo[checkedItems[0].province] : "0") + "% tax"}
                                         </option>
 
                                     ))

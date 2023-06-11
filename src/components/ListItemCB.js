@@ -5,7 +5,7 @@ const ListItemCB = ({ item, handleCheck }) => {
 
     const handleChange = (event) => {
         setIsChecked(event.target.checked);
-        handleCheck(item.oid, event.target.checked);
+        handleCheck(item, event.target.checked);
     };
 
   return (
