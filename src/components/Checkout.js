@@ -40,35 +40,44 @@ const Checkout = () => {
             // monthly
             if (data.recurStartNow) {
                 const amt = data.chargeTotal - data.chargeTotalTax;
-                setMessage1("Amount will be charged now is " + amt.toLocaleString('en-US', {
+                setMessage1("Amount will be charged now is " + data.chargeTotal.toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'CAD',
+                    }) + " (" + amt.toLocaleString('en-US', {
                     style: 'currency',
                     currency: 'CAD',
-                }) + " (plus tax " + data.chargeTotalTax.toLocaleString('en-US', {
+                }) + " + " + data.chargeTotalTax.toLocaleString('en-US', {
                         style: 'currency',
                         currency: 'CAD',
                     })
-                    +"), this is the subscription fee from " + data.selectedStartDate + " - " + data.recurStartDate);
+                    +" tax), this is the subscription fee from " + data.selectedStartDate + " - " + data.recurStartDate);
             }
             const recAmt = data.recurAmount - data.recurAmountTax;
-           setMessage2("Amount will be charged on " + data.recurStartDate + " is " + recAmt.toLocaleString('en-US', {
+           setMessage2("Amount will be charged on " + data.recurStartDate + " is " + data.recurAmount.toLocaleString('en-US', {
+                   style: 'currency',
+                   currency: 'CAD',
+               }) + " (" + recAmt.toLocaleString('en-US', {
                style: 'currency',
                currency: 'CAD',
-           }) + " (plus tax " + data.recurAmountTax.toLocaleString('en-US', {
+           }) + " + " + data.recurAmountTax.toLocaleString('en-US', {
                    style: 'currency',
                    currency: 'CAD',
                })
-               + ") (same amount will be charged on every month end for following month's subscription)");
+               + " tax) (same amount will be charged on every month end for following month's subscription)");
         } else {
             // annual
             const amt = data.chargeTotal - data.chargeTotalTax;
-            setMessage1("Amount will be charged now is " +  amt.toLocaleString('en-US', {
+            setMessage1("Amount will be charged now is " + data.chargeTotal.toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: 'CAD',
+                }) + " (" +  amt.toLocaleString('en-US', {
                 style: 'currency',
                 currency: 'CAD',
-            }) + " (plus tax " + data.chargeTotalTax.toLocaleString('en-US', {
+            }) + " + " + data.chargeTotalTax.toLocaleString('en-US', {
                     style: 'currency',
                     currency: 'CAD',
                 })
-                + ") (Subscription fee for " + data.selectedStartDate + " - " + data.recurStartDate + ", and the same amount will be charged every year)");
+                + " tax) (Subscription fee for " + data.selectedStartDate + " - " + data.recurStartDate + ", and the same amount will be charged every year)");
         }
         setLoading(false);
       },
@@ -95,7 +104,7 @@ const Checkout = () => {
               )}
               <div className="container">
                   <div className="card">
-                      <div className="card-header">Order Detail: (All amount includes tax)</div>
+                      <div className="card-header">Order Detail:</div>
                       <div className="card-body">
                           <div className="d-flex container">
                               <div className="container">
