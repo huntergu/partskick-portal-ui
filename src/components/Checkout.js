@@ -39,21 +39,36 @@ const Checkout = () => {
         if (data.recurUnit === "eom") {
             // monthly
             if (data.recurStartNow) {
-                setMessage1("Amount will be charged now is " + data.chargeTotal.toLocaleString('en-US', {
+                const amt = data.chargeTotal - data.chargeTotalTax;
+                setMessage1("Amount will be charged now is " + amt.toLocaleString('en-US', {
                     style: 'currency',
                     currency: 'CAD',
-                }) + ", this is the subscription fee from " + data.selectedStartDate + " - " + data.recurStartDate);
+                }) + " (plus tax " + data.chargeTotalTax.toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'CAD',
+                    })
+                    +"), this is the subscription fee from " + data.selectedStartDate + " - " + data.recurStartDate);
             }
-           setMessage2("Amount will be charged on " + data.recurStartDate + " is " + data.recurAmount.toLocaleString('en-US', {
+            const recAmt = data.recurAmount - data.recurAmountTax;
+           setMessage2("Amount will be charged on " + data.recurStartDate + " is " + recAmt.toLocaleString('en-US', {
                style: 'currency',
                currency: 'CAD',
-           }) + " (same amount will be charged on every month end for following month's subscription)");
+           }) + " (plus tax " + data.recurAmountTax.toLocaleString('en-US', {
+                   style: 'currency',
+                   currency: 'CAD',
+               })
+               + ") (same amount will be charged on every month end for following month's subscription)");
         } else {
             // annual
-            setMessage1("Amount will be charged now is " +  data.chargeTotal.toLocaleString('en-US', {
+            const amt = data.chargeTotal - data.chargeTotalTax;
+            setMessage1("Amount will be charged now is " +  amt.toLocaleString('en-US', {
                 style: 'currency',
                 currency: 'CAD',
-            }) + " (Subscription fee for " + data.selectedStartDate + " - " + data.recurStartDate + ", and the same amount will be charged every year)");
+            }) + " (plus tax " + data.chargeTotalTax.toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: 'CAD',
+                })
+                + ") (Subscription fee for " + data.selectedStartDate + " - " + data.recurStartDate + ", and the same amount will be charged every year)");
         }
         setLoading(false);
       },
