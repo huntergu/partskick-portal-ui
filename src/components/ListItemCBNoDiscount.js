@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const ListItemCBDiscount = ({ item, handleCheck }) => {
+const ListItemCBDiscount = ({ item, displayDiscount, subscription, handleCheck }) => {
     const [isChecked, setIsChecked] = useState(false);
     const currencyFormatter = new Intl.NumberFormat('en-US', {
         style: "currency",
@@ -9,7 +9,7 @@ const ListItemCBDiscount = ({ item, handleCheck }) => {
     });
     const handleChange = (event) => {
         setIsChecked(event.target.checked);
-        handleCheck(item, event.target.checked);
+        handleCheck(item, subscription, event.target.checked);
     };
 
   return (
@@ -22,10 +22,14 @@ const ListItemCBDiscount = ({ item, handleCheck }) => {
                           </label>
                       </div>
                       </th>
-                      <td>{item.subName}</td>
-                      <td>{currencyFormatter.format(item.subPrice)}</td>
+                      <td>{subscription.subscriptionName}</td>
+                      <td>{currencyFormatter.format(subscription.price)}</td>
                       <td>{item.subTax}%</td>
-                      <td>{item.subDiscount}</td>
+                      {
+                          displayDiscount && (
+                              <td>N/A</td>
+                          )
+                      }
                   </tr>
   );
 }

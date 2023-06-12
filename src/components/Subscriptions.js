@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect, useState} from "react";
 
 import userService from "../services/user.service";
-import {Link, Navigate} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import ListItemCB from "./ListItemCB";
 import DatePicker from "react-datepicker";
 import {clearMessage} from "../slices/message";
 import monerisService from "../services/moneris.service";
-import ListItemCBDiscount from "./ListItemCBDiscount";
+import ListItemDiscount from "./ListItemDiscount";
+import ListItemNoDiscount from "./ListItemNoDiscount";
 
 const Subscriptions = () => {
   const getMinDate = () => {
@@ -22,21 +22,15 @@ const Subscriptions = () => {
   const [responseCode, setResponseCode] = useState(400);
   const { user: currentUser } = useSelector((state) => state.auth);
   const [clientsSubs, setClientsSubs] = useState([]);
-  const [checkedItems, setCheckedItems] = useState([]);
-  const [selectedSub, setSelectedSub] = useState(null);
   const [subs, setSubs] = useState([]);
   const [message, setMessage] = useState(null);
-  const [displaySubs, setDisplaySubs] = useState([]);
-  const [showSubs, setShowSubs] = useState(false);
   const [selectedDate, setSelectedDate] = useState(getMinDate());
   const [timeZone, setTimeZone] = useState("");
   const [clientWithDisc, setClientWithDisc] = useState([]);
   const [clientWithoutDisc, setClientWithoutDisc] = useState([]);
-  const [discountSub, setDiscountSub] = useState([]);
-  const [displayClientWithDiscount, setDisplayClientWithDiscount] = useState([]);
-  const [selectedDiscountSub, setSelectedDiscountSub] = useState(0);
-  const [checkedDiscountClient, setCheckedDiscountClient] = useState([]);
   const [taxInfo, setTaxInfo] = useState(undefined);
+  const [displayDiscount, setDisplayDiscount] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
     // Retrieve the client's timezone
@@ -49,27 +43,18 @@ const Subscriptions = () => {
     dispatch(clearMessage());
   }, [dispatch]);
 
-  const currencyFormatter = new Intl.NumberFormat('en-US', {
-    style: "currency",
-    currency: "CAD",
-    minimumFractionDigits: 2
-  });
-
   useEffect(() => {
     setLoading(true);
     userService.getClientList().then(
       (response) => {
         let cWithd = [];
         let cWithoutd = [];
-        let disc = [];
         if (response.data && response.data instanceof Array) {
           setContent(response.data);
           response.data.map((c) => {
-            if (c.subId) {
+            if (c.subId && c.subDiscount > 0) {
               cWithd.push(c);
-              if (!disc.find(d => d.id === c.subId)) {
-                disc.push({id: c.subId, name: c.subName})
-              }
+              setDisplayDiscount(true);
             } else {
               cWithoutd.push(c);
             }
@@ -77,11 +62,6 @@ const Subscriptions = () => {
         }
         setClientWithoutDisc(cWithoutd);
         setClientWithDisc(cWithd);
-        setDiscountSub(disc);
-        if (disc.length > 0) {
-          setSelectedDiscountSub(disc[0].id);
-          filterDisplayForDiscountedClient(disc[0].id, cWithd);
-        }
         setLoading(false);
         setResponseCode(200);
       },
@@ -149,62 +129,21 @@ const Subscriptions = () => {
     );
   }, []);
 
-  useEffect(() => {
-    // console.log(checkedItems);
-    setShowSubs(false);
-  }, [checkedItems])
 
   if (!currentUser) {
     return <Navigate to="/login" />;
   }
 
-  const handleCheck = (item, isChecked) => {
-    if (isChecked) {
-      setCheckedItems([...checkedItems, item]);
-    } else {
-      const updatedItems = checkedItems.filter((c) => c.oid !== item.oid);
-      setCheckedItems(updatedItems);
+    const handleDiscountItemSelect = (item) => {
+        setSelectedItem(item);
     }
-  };
 
-    const handleDiscountClientCheck = (item, isChecked) => {
-    if (isChecked) {
-      setCheckedDiscountClient([...checkedDiscountClient, item]);
-    } else {
-      setCheckedDiscountClient(checkedDiscountClient.filter((c) => c.oid !== item.oid));
+    const handleNoDiscountItemSelect = (item, sub) => {
+        item.subPrice = sub.price;
+        item.subDiscount = 0;
+        item.subId = sub.id;
+        setSelectedItem(item);
     }
-  };
-
-  const differentProv = (c) => {
-    let ps = undefined;
-    for (const xc of c) {
-      if (!ps) {
-        ps = xc.province;
-      } else if (ps !== xc.province) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  const handleShowPlan = () => {
-    if (checkedItems.length > 0) {
-      if (differentProv(checkedItems)) {
-        alert("Cannot combine clients in different province/state into one payment.")
-        return;
-      }
-      let dis = subs.filter(s => s.multiShop === checkedItems.length);
-      if (dis.length > 0) {
-        setDisplaySubs(dis);
-        setSelectedSub(dis[0]);
-        setShowSubs(true);
-      } else {
-        alert("No available plan for " + checkedItems.length + " shops");
-      }
-    } else {
-      alert("Please select at least one shop");
-    }
-  }
 
   const refreshSubInfo = () => {
     setLoading(true);
@@ -229,21 +168,11 @@ const Subscriptions = () => {
     );
   }
 
-  const handleSelection = (event) => {
-    setSelectedSub(displaySubs[event.target.selectedIndex]);
-  }
-
-  const centerStyle = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
-  };
-
-  const handleSubscribe = (clients, sub, startDate) => {
+  const handleSubscribe = (client, startDate) => {
+    console.log(client);
     setLoading(true);
-    let subId = sub.id;
 
-    monerisService.preLoad(clients.map(c => c.oid), subId, startDate, timeZone, false).then(
+    monerisService.preLoad([client.oid], client.subId, startDate, timeZone, true).then(
         (response) => {
           // console.log(response.data);
           setResponseCode(200);
@@ -264,169 +193,17 @@ const Subscriptions = () => {
           setLoading(false);
         }
     );
-
-  }
-
-  const handleDiscountSubscribe = (clients, startDate) => {
-    if (!clients || clients.length === 0) {
-      alert("Please select at least one client");
-      return;
-    }
-    if (differentProv(clients)) {
-      alert("Cannot combine clients in different province/state into one payment.")
-      return;
-    }
-
-    setLoading(true);
-
-
-    monerisService.preLoad(clients.map(client => client.oid), selectedDiscountSub, startDate, timeZone, true).then(
-        (response) => {
-          // console.log(response.data);
-          setResponseCode(200);
-          setLoading(false);
-          localStorage.setItem("orderId", response.data);
-          window.open("/checkout", "_blank");
-        },
-        (error) => {
-          const _content =
-              (error.response &&
-                  error.response.data) ||
-              error.message ||
-              error.toString();
-          console.log(error);
-
-          setContent(_content);
-          setResponseCode(error.response.status);
-          setLoading(false);
-        }
-    );
-  }
-
-  const handleSelectDiscount = (event) => {
-    setSelectedDiscountSub(event.target.value);
-    setCheckedDiscountClient([]);
-    filterDisplayForDiscountedClient(event.target.value, clientWithDisc);
-  }
-
-  const filterDisplayForDiscountedClient = (_subId, clients) => {
-    let d = [];
-    clients.forEach((c) => {
-
-      if (c.subId === parseInt(_subId)) {
-        d.push(c);
-      }
-    });
-    setDisplayClientWithDiscount(d);
   }
 
   return (
       <div>
         {
-          clientWithoutDisc && clientWithoutDisc.length > 0 && (
-                <div className="container">
-                  <div className="card">
-                    <div className="card-header">Clients {loading && (
-                        <span className="spinner-border spinner-border-sm"></span>
-                    )}</div>
-                    <div className="card-body">
-                      <div className="d-flex container">
-                        <div className="container">
-                          {
-                            clientWithoutDisc.map((c, index) => (
-                                  <ListItemCB key={c.oid} item={c}  handleCheck={handleCheck} />
-                              ))
-                          }
-                        </div>
-                        <div className="container">
-                          <div className="d-flex justify-content-center">
-                            <button className="btn btn-primary" style={centerStyle} onClick={handleShowPlan}>Show Available Plans</button>
-                          </div>
-                          {
-                              showSubs &&
-                              <div className="container mt-3">
-                                <button className="btn-primary" onClick={() => handleSubscribe(checkedItems, selectedSub, selectedDate)}>Subscribe</button>
-                              </div>
-                          }
-
-                        </div>
-                        {
-                            showSubs && displaySubs && displaySubs.length > 0 &&
-                            <div className="mr-3">
-                              <div className="dropdown">
-                                <select
-                                    value={selectedSub.id}
-                                    className="form-select"
-                                    onChange={handleSelection}
-                                >
-                                  {
-                                    displaySubs.map((sub, index) => (
-                                        <option value={sub.id} >
-                                          {sub.subscriptionName + "  " + currencyFormatter.format(sub.price) + " plus " + (checkedItems.length > 0 ? taxInfo[checkedItems[0].province] : "0") + "% tax"}
-                                        </option>
-
-                                    ))
-                                  }
-                                </select>
-                              </div>
-                              <span className="text-nowrap mr-3">Start Date:</span>
-                              <div>
-                                <DatePicker
-                                    selected={selectedDate}
-                                    onChange={date => setSelectedDate(date)}
-                                    minDate={getMinDate()}
-                                    popperPlacement="top-start"
-                                    popperModifiers={{
-                                      preventOverflow: {
-                                        enabled: true,
-                                        escapeWithReference: false,
-                                        boundariesElement: 'viewport',
-                                      },
-                                      flip: {
-                                        enabled: true,
-                                      },
-                                      offset: {
-                                        enabled: true,
-                                        offset: '5px, 10px'
-                                      },
-                                    }}
-                                    style={{zIndex: 9999}}
-                                />
-                              </div>
-
-                            </div>
-                        }
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-
-            )
-        }
-        {
-          clientWithDisc && clientWithDisc.length > 0 && (
+            ((clientWithDisc && clientWithDisc.length > 0) || (clientWithoutDisc && clientWithoutDisc.length > 0)) && (
                 <div className="container">
                   <div className="card">
                     <div className="card-header d-flex container justify-content-between">
-                      <div className="dropdown mt-3 mr-5">
-                        <select
-                            value={selectedDiscountSub}
-                            className="form-select"
-                            onChange={handleSelectDiscount}
-                        >
-                          {
-                            discountSub.map((sub, index) => (
-                                <option value={sub.id} >
-                                  {sub.name}
-                                </option>
-
-                            ))
-                          }
-                        </select>
-                      </div>
                       <div>
-                      <span className="text-nowrap mr-3">Start Date:</span>
+                        <span className="text-nowrap mr-3">Start Date:</span>
                         <div>
                           <DatePicker
                               selected={selectedDate}
@@ -453,12 +230,15 @@ const Subscriptions = () => {
 
                         {loading && (
                         <span className="spinner-border spinner-border-sm"></span>
-                    )}
-                    </div>
-                      <div className="container mt-3">
-                        <button className="btn-primary" onClick={() => handleDiscountSubscribe(checkedDiscountClient, selectedDate)}>Subscribe</button>
+                        )}
                       </div>
-
+                        {
+                            selectedItem && (
+                                <div className="container mt-3">
+                                    <button className="btn-primary" onClick={() => handleSubscribe(selectedItem, selectedDate)}>Subscribe</button>
+                                </div>
+                            )
+                        }
                     </div>
                     <div className="card-body">
                       <div className="d-flex container">
@@ -470,14 +250,30 @@ const Subscriptions = () => {
                                 <th scope="col">Client</th>
                                 <th scope="col">Subscription</th>
                                 <th scope="col">Price</th>
-                                <th scope="col">Discount (%off)</th>
+                                <th scope="col">Tax</th>
+                                {
+                                    displayDiscount && (
+                                        <th scope="col">Discount (%off)</th>
+                                    )
+                                }
                               </tr>
                               </thead>
                               <tbody>
                               {
-                                displayClientWithDiscount.map((c, index) => (
-                                    <ListItemCBDiscount key={c.oid} item={c}  handleCheck={handleDiscountClientCheck} />
-                                ))
+                                  subs.length > 0 && clientWithDisc && clientWithDisc.length > 0 && (
+                                    clientWithDisc.map((c, index) => (
+                                        <ListItemDiscount key={c.oid} item={c} handleCheck={handleDiscountItemSelect} />
+                                    ))
+                                  )
+                              }
+                              {
+                                  subs.length > 0 && clientWithoutDisc && clientWithoutDisc.length > 0 && (
+                                      clientWithoutDisc.map((c, index) => (
+                                          subs.map(sub => (
+                                              <ListItemNoDiscount key={c.oid + sub.id} item={c} displayDiscount={displayDiscount} subscription={sub} handleCheck={handleNoDiscountItemSelect} />
+                                          ))
+                                      ))
+                                  )
                               }
                               </tbody>
                             </table>

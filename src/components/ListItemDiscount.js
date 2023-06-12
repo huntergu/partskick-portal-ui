@@ -1,23 +1,23 @@
 import React, {useState} from 'react';
 
-const ListItemCBDiscount = ({ item, handleCheck }) => {
-    const [isChecked, setIsChecked] = useState(false);
+const ListItemDiscount = ({ item, selected, handleCheck }) => {
     const currencyFormatter = new Intl.NumberFormat('en-US', {
         style: "currency",
         currency: "CAD",
         minimumFractionDigits: 2
     });
-    const handleChange = (event) => {
-        setIsChecked(event.target.checked);
-        handleCheck(item, event.target.checked);
-    };
 
   return (
                   <tr>
                       <th scope="row">
                           <div>
                           <label>
-                              <input type="checkbox"  checked={isChecked} onChange={handleChange} />
+                              <input
+                                  type="radio"
+                                  name="itemSelection"
+                                  checked={selected}
+                                  onChange={() => handleCheck(item)}
+                              />
                               {item.clientName}
                           </label>
                       </div>
@@ -30,4 +30,4 @@ const ListItemCBDiscount = ({ item, handleCheck }) => {
   );
 }
 
-export default ListItemCBDiscount;
+export default ListItemDiscount;
