@@ -30,6 +30,7 @@ import Receipt from "./components/moneris/Receipt";
 import PaymentValidation from "./components/moneris/PaymentValidation";
 import CreateUser from "./components/CreateUser";
 import ClientDiscount from "./components/ClientDiscount";
+import ResetUserPassword from "./components/ResetUserPassword";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -90,6 +91,9 @@ const App = () => {
                   <div className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
                     <Link to={"/createUser"} className="dropdown-item">
                       Create User
+                    </Link>
+                    <Link to={"/resetUserPassword"} className="dropdown-item">
+                      Reset User Password
                     </Link>
                     <Link to={"/clientDiscount"} className="dropdown-item">
                       Set Client Discount
@@ -168,6 +172,7 @@ const App = () => {
             <Route path="/payment/receipt" element={<Receipt />} />
             <Route path="/createUser" element={<CreateUser />} />
             <Route path="/clientDiscount" element={<ClientDiscount />} />
+            <Route path="/resetUserPassword" element={<ResetUserPassword />} />
           </Routes>
         </div>
       </div>

@@ -8,7 +8,7 @@ axios.interceptors.response.use(function (response) {
     // Do something with response error
     if (error.response && error.response.status === 401) {
         localStorage.removeItem("user");
-        window.location.href = '/login';
+        window.location.href = '/login?code=401';
     }
     return Promise.reject(error);
 });

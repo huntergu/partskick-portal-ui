@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/ListItemCBNoDiscount.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ListItemDiscount.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ListItemNoDiscount.js" afterDir="false" />
+    <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="single client payment">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ListItemCBDiscount.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ListItemCBDiscount.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Subscriptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Subscriptions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/AuthInterceptor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/AuthInterceptor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/admin.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/admin.service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,6 +159,8 @@
       <workItem from="1686449306038" duration="8184000" />
       <workItem from="1686492358016" duration="496000" />
       <workItem from="1686498078747" duration="2948000" />
+      <workItem from="1686704611627" duration="87000" />
+      <workItem from="1687905304485" duration="5878000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1680323657807</created>
@@ -399,7 +400,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686457505910</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="single client payment">
+      <created>1686538472636</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1686538472636</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -447,7 +455,8 @@
     <MESSAGE value="refresh sub" />
     <MESSAGE value="sub date format" />
     <MESSAGE value="tax by province" />
-    <option name="LAST_COMMIT_MESSAGE" value="tax by province" />
+    <MESSAGE value="single client payment" />
+    <option name="LAST_COMMIT_MESSAGE" value="single client payment" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

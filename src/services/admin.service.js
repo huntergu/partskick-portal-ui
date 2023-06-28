@@ -27,6 +27,27 @@ export const createUser = createAsyncThunk(
     }
 );
 
+export const resetUserPassword = createAsyncThunk(
+    "user/resetPwd",
+    async ({ email }, thunkAPI) => {
+        try {
+            const response = await axios.post(ADMIN_API_URL + "resetUserPassword",
+                {email}, { headers: authHeader() });
+            thunkAPI.dispatch(setMessage(response.data));
+            return response.data;
+        } catch (error) {
+            const message =
+                (error.response &&
+                    error.response.data) ||
+                error.message ||
+                error.toString();
+            console.log(error);
+            thunkAPI.dispatch(setMessage(message));
+            return thunkAPI.rejectWithValue();
+        }
+    }
+);
+
 export const getClients = () => axios.get(ADMIN_API_URL + "getClients", { headers: authHeader() });
 
 export const getDiscountSub = () => axios.get(ADMIN_API_URL + "getDiscountSub", { headers: authHeader() });

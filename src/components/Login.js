@@ -5,22 +5,23 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 import { login } from "../slices/auth";
-import { clearMessage } from "../slices/message";
 
 const Login = () => {
   let navigate = useNavigate();
-
   const [loading, setLoading] = useState(false);
-
   const { isLoggedIn } = useSelector((state) => state.auth);
-  const { message } = useSelector((state) => state.message);
+  const [message, setMessage] = useState("");
+
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(clearMessage());
-  }, [dispatch]);
-
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const msgCode = urlSearchParams.get("code")
+    if (msgCode === "401") {
+      setMessage("Invalid username or password");
+    }
+  }, []);
   const initialValues = {
     username: "",
     password: "",
@@ -41,7 +42,7 @@ const Login = () => {
         navigate("/home");
         window.location.reload();
       })
-      .catch(() => {
+      .catch((error) => {
         setLoading(false);
       });
   };
