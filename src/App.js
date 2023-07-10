@@ -31,6 +31,7 @@ import PaymentValidation from "./components/moneris/PaymentValidation";
 import CreateUser from "./components/CreateUser";
 import ClientDiscount from "./components/ClientDiscount";
 import ResetUserPassword from "./components/ResetUserPassword";
+import Inventory from "./components/Inventory";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -108,6 +109,11 @@ const App = () => {
                 Subscriptions
               </Link>
             </li>
+            <li className="nav-item">
+              <Link to={"/inventory"} className="nav-link">
+                Inventory
+              </Link>
+            </li>
 
             {showModeratorBoard && (
               <li className="nav-item">
@@ -173,6 +179,7 @@ const App = () => {
             <Route path="/createUser" element={<CreateUser />} />
             <Route path="/clientDiscount" element={<ClientDiscount />} />
             <Route path="/resetUserPassword" element={<ResetUserPassword />} />
+            <Route path="/inventory" element={<Inventory />} />
           </Routes>
         </div>
       </div>

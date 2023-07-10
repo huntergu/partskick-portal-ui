@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="single client payment">
+    <list default="true" id="4d764f8b-1d78-4045-a489-08457559888a" name="Changes" comment="pwd reset for user">
+      <change afterPath="$PROJECT_DIR$/src/components/Inventory.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/parts.service.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/AuthInterceptor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/AuthInterceptor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/admin.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/admin.service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +62,7 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/Hunter/PK/partskick-portal-ui/src/components",
+    "last_opened_file_path": "D:/Hunter/PK/partskick-portal-ui/src/services",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -87,11 +86,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Hunter\PK\partskick-portal-ui\src\services" />
       <recent name="D:\Hunter\PK\partskick-portal-ui\src\components" />
       <recent name="C:\dev\partskick-portal-ui\src\components" />
       <recent name="C:\dev\partskick-portal-ui\src\components\moneris" />
       <recent name="C:\dev\partskick-portal-ui" />
-      <recent name="C:\dev\partskick-portal-ui\src\paypal" />
     </key>
   </component>
   <component name="RunManager">
@@ -160,7 +159,8 @@
       <workItem from="1686492358016" duration="496000" />
       <workItem from="1686498078747" duration="2948000" />
       <workItem from="1686704611627" duration="87000" />
-      <workItem from="1687905304485" duration="5878000" />
+      <workItem from="1687905304485" duration="6661000" />
+      <workItem from="1688952212139" duration="4975000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1680323657807</created>
@@ -407,7 +407,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686538472636</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="pwd reset for user">
+      <created>1687920974146</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1687920974146</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -431,7 +438,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="init" />
     <MESSAGE value="register" />
     <MESSAGE value="login" />
     <MESSAGE value="change pwd" />
@@ -456,7 +462,8 @@
     <MESSAGE value="sub date format" />
     <MESSAGE value="tax by province" />
     <MESSAGE value="single client payment" />
-    <option name="LAST_COMMIT_MESSAGE" value="single client payment" />
+    <MESSAGE value="pwd reset for user" />
+    <option name="LAST_COMMIT_MESSAGE" value="pwd reset for user" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
